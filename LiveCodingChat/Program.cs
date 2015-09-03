@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Collections.Generic;
 
 namespace LiveCodingChat
 {
@@ -20,7 +21,10 @@ namespace LiveCodingChat
 			string username;
 			Console.Write ("Username:");
 			username = Console.ReadLine ();
-			session = new LiveCodingChat.Livecoding.LivecodingSession (new TwitchLogin(),username);
+
+
+
+			session = new LiveCodingChat.Livecoding.LivecodingSession (ReadLoginMethod(),username);
 			session.PasswordRequested += Session_PasswordRequested;
 			session.SessionAutenticated += Session_SessionAutenticated;
 			session.EnsureAuthenticated ();
@@ -28,11 +32,30 @@ namespace LiveCodingChat
 				System.Threading.Thread.Sleep (10);
 			}
 		}
+		static ILoginMethod ReadLoginMethod()
+		{
+			List<Type> types = new List<Type>();
+			int i = 0;
+			foreach (Type t in System.Reflection.Assembly.GetEntryAssembly().GetTypes()) {
+				if (typeof(ILoginMethod).IsAssignableFrom (t) && !t.IsInterface && !t.IsAbstract) {
+					types.Add (t);
+					Console.WriteLine ("[" + i.ToString () + "] " + t.Name);
+					i++;
+				}
+			}
+			int parsed = 0;
+			do {
+				Console.Write ("Use Login Method:");
+			} while(!int.TryParse (Console.ReadLine (), out parsed) || parsed >= types.Count || parsed <0);
+			return (ILoginMethod)types [parsed].GetConstructor (new Type[]{ }).Invoke (new object[]{ });
+		}
 
 		static void Session_SessionAutenticated (object sender, EventArgs e)
 		{
 			Console.WriteLine ("Authenticated");
-			session.BeginOpenChat ("bobstriker", new AsyncCallback (EndOpenChat), null);
+			Console.Write ("Room name:");
+			string room = Console.ReadLine ();
+			session.BeginOpenChat (room, new AsyncCallback (EndOpenChat), null);
 
 		}
 		private static void EndOpenChat(IAsyncResult res)
