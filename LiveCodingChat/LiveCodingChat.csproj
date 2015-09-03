@@ -54,6 +54,8 @@
     <Compile Include="LivecodingSession.cs" />
     <Compile Include="Livecoding\ChatRoom.cs" />
     <Compile Include="Xmpp\IDManager.cs" />
+    <Compile Include="Livecoding\EmailLogin.cs" />
+    <Compile Include="Livecoding\GooglePlusLogin.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
