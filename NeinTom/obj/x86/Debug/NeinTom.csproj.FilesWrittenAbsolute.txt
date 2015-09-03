@@ -1,0 +1,5 @@
+/home/julian/Projects/LiveCoding/LiveCodingChat/NeinTom/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/julian/Projects/LiveCoding/LiveCodingChat/NeinTom/bin/Debug/NeinTom.exe.mdb
+/home/julian/Projects/LiveCoding/LiveCodingChat/NeinTom/bin/Debug/NeinTom.exe
+/home/julian/Projects/LiveCoding/LiveCodingChat/NeinTom/obj/x86/Debug/NeinTom.exe
+/home/julian/Projects/LiveCoding/LiveCodingChat/NeinTom/obj/x86/Debug/NeinTom.exe.mdb
