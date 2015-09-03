@@ -279,7 +279,7 @@ namespace LiveCodingChat.Xmpp
 		private void Socket_MessageReceived (object sender, MessageReceivedEventArgs e)
 		{
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine (e.Message);//TODO:
+			//Console.WriteLine (e.Message);//TODO:
 			Console.ForegroundColor = ConsoleColor.White;
 			XmlDocument doc= new XmlDocument();
 			doc.LoadXml (e.Message);
@@ -308,7 +308,7 @@ namespace LiveCodingChat.Xmpp
 				}
 			}
 			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine (xml);//TODO:
+			//Console.WriteLine (xml);//TODO:
 			Console.ForegroundColor = ConsoleColor.White;
 			socket.Send (xml);
 		}
