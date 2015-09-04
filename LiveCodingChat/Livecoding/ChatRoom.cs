@@ -129,7 +129,6 @@ namespace LiveCodingChat.Livecoding
 			}
 			JID = json["jid"];
 			Password = json["password"];
-
 			return true;
 		}
 	}

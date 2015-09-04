@@ -46,6 +46,7 @@ namespace LiveCodingChat
 			request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705)";
 			request.CookieContainer = cookies;
 			request.Method = "POST";
+			request.Referer = "https://www.livecoding.tv/accounts/login/";
 			request.ContentType = "application/x-www-form-urlencoded";
 
 			postData.Add ("csrfmiddlewaretoken", HtmlHelper.getAttribute(HtmlHelper.getSingleElement(data,"<input type='hidden' name='csrfmiddlewaretoken'"),"value"));
