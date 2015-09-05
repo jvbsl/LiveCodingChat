@@ -6,8 +6,14 @@ namespace NeinTom
 	{
 		private void InitializeComponents()
 		{
+			lstUsers = new System.Windows.Forms.ListBox ();
+			lstUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+
 			this.Text = "Main";
+			this.Controls.Add (lstUsers);
 		}
+
+		private System.Windows.Forms.ListBox lstUsers;
 	}
 }
 

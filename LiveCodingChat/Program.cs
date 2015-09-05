@@ -62,7 +62,7 @@ namespace LiveCodingChat
 		{
 			try{
 			Livecoding.ChatRoom room = session.EndOpenChat (res);
-			room.Client.MessageReceived += Test_MessageReceived;
+			room.Client.MessageReceived += Room_Client_MessageReceived;;
 			while (true) {
 				string ln=Console.ReadLine ();
 				if (ln == "exit") {
@@ -73,6 +73,22 @@ namespace LiveCodingChat
 			}
 			}catch(Exception ex) {
 				Console.WriteLine (ex.Message);
+			}
+		}
+
+		static void Room_Client_MessageReceived (LiveCodingChat.Xmpp.Room room, LiveCodingChat.Xmpp.MessageReceivedEventArgs e)
+		{
+			Console.ForegroundColor = ConsoleColor.Blue;
+			Console.WriteLine (e.Nick + ": " + e.Message);
+			Console.ForegroundColor = ConsoleColor.White;
+			string fnd = e.Message.ToLower ();
+			System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex ("NE[E]*I[I]*N TO[O]*M NE[E]*I[I]*N");
+			if (fnd.Contains("@tom") || fnd.Contains("@bobstriker")||r.IsMatch(fnd.ToUpper()))
+			{
+				if (player == null)
+					System.Media.SystemSounds.Exclamation.Play ();
+				else
+					player.Play ();
 			}
 		}
 
@@ -109,22 +125,6 @@ namespace LiveCodingChat
 			// Stops Receving Keys Once Enter is Pressed
 			while (key.Key != ConsoleKey.Enter);
 			return pass;
-		}
-		static void Test_MessageReceived (LiveCodingChat.Xmpp.Room room, string nick, string message)
-		{
-			Console.ForegroundColor = ConsoleColor.Blue;
-			Console.WriteLine (nick + ": " + message);
-			Console.ForegroundColor = ConsoleColor.White;
-			string fnd = message.ToLower ();
-			System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex ("N[E]*I[I]*N TO[O]*M NE[E]*I[I]*N");
-			if (fnd.Contains("@tom") || fnd.Contains("@bobstriker")||r.IsMatch(fnd.ToUpper()))
-			{
-
-				if (player == null)
-					System.Media.SystemSounds.Exclamation.Play ();
-				else
-					player.Play ();
-			}
 		}
 	}
 }

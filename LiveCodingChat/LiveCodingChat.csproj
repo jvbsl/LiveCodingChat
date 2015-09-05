@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B33D8D4C-F48F-4375-A2D6-5A060C77CFD9}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>LiveCodingChat</RootNamespace>
     <AssemblyName>LiveCodingChat</AssemblyName>
   </PropertyGroup>
@@ -56,6 +56,11 @@
     <Compile Include="Xmpp\IDManager.cs" />
     <Compile Include="Livecoding\EmailLogin.cs" />
     <Compile Include="Livecoding\GooglePlusLogin.cs" />
+    <Compile Include="Livecoding\GithubLogin.cs" />
+    <Compile Include="Livecoding\LinkedInLogin.cs" />
+    <Compile Include="Livecoding\YahooLogin.cs" />
+    <Compile Include="Livecoding\FacebookLogin.cs" />
+    <Compile Include="Livecoding\LoginFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

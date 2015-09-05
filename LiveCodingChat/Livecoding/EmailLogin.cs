@@ -16,7 +16,7 @@ namespace LiveCodingChat
 
 		public void LoginAsync (string username, string password, ref System.Net.CookieContainer cookies)
 		{
-			Console.WriteLine ("Login Twitch");
+			Console.WriteLine ("Login E-Mail");
 			HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create ("https://www.livecoding.tv/accounts/login");
 			request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705)";
 			request.CookieContainer = cookies;

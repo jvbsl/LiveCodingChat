@@ -8,7 +8,39 @@ using System.Xml;
 
 namespace LiveCodingChat.Xmpp
 {
-	public delegate void MessageReceivedDelegate(Room room,string nick,string message);
+	public class MessageReceivedEventArgs{
+		public MessageReceivedEventArgs(User user,string message,DateTime timeStamp)
+		{
+			Nick = user.ID;
+			User = user;
+			Message = message;
+			TimeStamp = timeStamp;
+		}
+		public MessageReceivedEventArgs(string nick,string message,DateTime timeStamp)
+		{
+			Nick = nick;
+			User = null;
+			Message = message;
+			TimeStamp = timeStamp;
+		}
+		public string Nick {
+			get;
+			private set;
+		}
+		public string Message {
+			get;
+			private set;
+		}
+		public User User {
+			get;
+			private set;
+		}
+		public DateTime TimeStamp{
+			get;
+			private set;
+		}
+	}
+	public delegate void MessageReceivedDelegate(Room room,MessageReceivedEventArgs e);
 	public delegate void AuthenticatedDelegate(object sender,EventArgs e);
 	public delegate void XMPPMessage(XmlElement el);
 	public class XmppTest
@@ -173,8 +205,15 @@ namespace LiveCodingChat.Xmpp
 							stamp = DateTime.Parse (stmp);
 						}
 					}
-					if (MessageReceived != null)
-						MessageReceived (r, user, "[" + stamp.ToString () + "]" + message);
+					if (MessageReceived != null) {
+						User userObj = null;
+						if (r.Users.ContainsKey (user)) {
+							userObj = r.Users [user];
+							MessageReceived (r, new MessageReceivedEventArgs (r.Users [user], message,stamp));//TODO: stamp
+						} else {
+							MessageReceived (r, new MessageReceivedEventArgs (user, message,stamp));
+						}
+					}
 				}
 			}
 		}
@@ -276,7 +315,7 @@ namespace LiveCodingChat.Xmpp
 
 			Send (sb.ToString());
 		}
-		private void Socket_MessageReceived (object sender, MessageReceivedEventArgs e)
+		private void Socket_MessageReceived (object sender,WebSocket4Net.MessageReceivedEventArgs e)
 		{
 			Console.ForegroundColor = ConsoleColor.Green;
 			//Console.WriteLine (e.Message);//TODO:

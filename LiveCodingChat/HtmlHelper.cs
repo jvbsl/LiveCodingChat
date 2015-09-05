@@ -97,6 +97,14 @@ namespace LiveCodingChat
 				eInd = data.Length - 1;
 			return data.Substring (fInd, eInd - fInd+1);
 		}
+		public static string Escape(string data)
+		{
+			return System.Text.RegularExpressions.Regex.Escape (data);
+		}
+		public static string Unescape(string data)
+		{
+			return System.Text.RegularExpressions.Regex.Unescape (data);
+		}
 	}
 }
 

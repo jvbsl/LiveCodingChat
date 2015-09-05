@@ -45,4 +45,10 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LiveCodingChat\LiveCodingChat.csproj">
+      <Project>{B33D8D4C-F48F-4375-A2D6-5A060C77CFD9}</Project>
+      <Name>LiveCodingChat</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
