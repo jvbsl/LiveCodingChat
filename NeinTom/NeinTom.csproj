@@ -38,6 +38,11 @@
     <Compile Include="frmMain.Designer.cs" />
     <Compile Include="frmLogin.cs" />
     <Compile Include="frmLogin.Designer.cs" />
+    <Compile Include="CustomTabControl.cs" />
+    <Compile Include="frmChat.cs" />
+    <Compile Include="frmChat.Designer.cs" />
+    <Compile Include="ChatControl.cs" />
+    <Compile Include="ChatControl.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
