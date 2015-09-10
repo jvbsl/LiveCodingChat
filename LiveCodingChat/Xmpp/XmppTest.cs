@@ -163,7 +163,7 @@ namespace LiveCodingChat.Xmpp
 				string[] frm = element.Attributes.GetNamedItem ("from").Value.Split ('/');
 				string roomId = frm[0];
 				string userId = frm[1];
-                string type = element.Attributes.GetNamedItem("type").Value;
+                string type = getValue(element.Attributes.GetNamedItem("type"));
                 
 				if (Rooms.ContainsKey (frm [0])) {
 					Room room = Rooms [roomId];

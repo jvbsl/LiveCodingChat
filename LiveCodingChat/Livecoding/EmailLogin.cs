@@ -33,7 +33,7 @@ namespace LiveCodingChat
 			string data;//todo: cookie
 			using (System.IO.StreamReader sr = new System.IO.StreamReader (response.GetResponseStream ())) {
 				data = sr.ReadToEnd ();
-				data = HtmlHelper.getElement (data, "<form class=\"form-inline clearfix\"");
+				data = HtmlHelper.getElement (data, "<form class=\"clearfix\"");
 			}
 
 			LoginNormal (username, password, data, ref cookies);
