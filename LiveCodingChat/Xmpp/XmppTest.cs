@@ -168,7 +168,7 @@ namespace LiveCodingChat.Xmpp
 				if (Rooms.ContainsKey (frm [0])) {
 					Room room = Rooms [roomId];
 					User user;
-                    if (type == "available")
+                    if (type == "available" || type == null)
                     {
                         if (room.Users.ContainsKey(userId))
                             user = room.Users[userId];
