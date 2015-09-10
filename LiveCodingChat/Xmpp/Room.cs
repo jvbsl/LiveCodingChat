@@ -11,7 +11,7 @@ namespace LiveCodingChat.Xmpp
         Available,
         Offline
     }
-    public delegate void UserStateChanged(User user,UserState state);
+    public delegate void UserStateChanged(Room room,User user,UserState state);
 	public class Room
 	{
         public event UserStateChanged UserStateChanged;
@@ -28,13 +28,13 @@ namespace LiveCodingChat.Xmpp
         {
             Users.Add(id, user);
             if (UserStateChanged != null)
-                UserStateChanged(user,UserState.Available);
+                UserStateChanged(this,user,UserState.Available);
         }
         public void UserLeft(string id)
         {
             if (Users.ContainsKey(id)){
                 if (UserStateChanged != null)
-                    UserStateChanged(Users[id],UserState.Offline);
+                    UserStateChanged(this,Users[id],UserState.Offline);
                 Users.Remove(id);
 
             }
