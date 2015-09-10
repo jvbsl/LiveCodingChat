@@ -163,28 +163,43 @@ namespace LiveCodingChat.Xmpp
 				string[] frm = element.Attributes.GetNamedItem ("from").Value.Split ('/');
 				string roomId = frm[0];
 				string userId = frm[1];
+                string type = element.Attributes.GetNamedItem("type").Value;
+                
 				if (Rooms.ContainsKey (frm [0])) {
 					Room room = Rooms [roomId];
 					User user;
-					if (room.Users.ContainsKey(userId))
-						user = room.Users [userId];
-					else
-						room.Users.Add (userId, user = new User (userId));
+                    if (type == "available")
+                    {
+                        if (room.Users.ContainsKey(userId))
+                            user = room.Users[userId];
+                        else
+                            room.UserJoined(userId, user = new User(userId));
 
-					foreach (XmlElement el in element.ChildNodes) {
-						if (el.Name == "x" && el.FirstChild.Name == "item") {
-							string affiliation = getValue(el.FirstChild.Attributes.GetNamedItem ("admin"));
-							string role = getValue(el.FirstChild.Attributes.GetNamedItem ("role"));
-							string premium = getValue(el.FirstChild.Attributes.GetNamedItem ("premium"));
-							string staff = getValue(el.FirstChild.Attributes.GetNamedItem ("staff"));
-							string color = getValue(el.FirstChild.Attributes.GetNamedItem ("color"));
-							user.Affiliation = affiliation ?? user.Affiliation;
-							user.Role = role ?? user.Role;
-							user.Premium = premium == null ? user.Premium : bool.Parse (premium);
-							user.Staff = staff == null ? user.Staff : bool.Parse (staff);
-							user.Color = color == null ? user.Color : System.Drawing.Color.FromArgb (Convert.ToInt32(color.Substring (1),16));
-						}
-					}
+                        //room.SendMessage("Willkommen test", user);
+                        
+                        foreach (XmlElement el in element.ChildNodes)
+                        {
+                            if (el.Name == "x" && el.FirstChild.Name == "item")
+                            {
+                                string affiliation = getValue(el.FirstChild.Attributes.GetNamedItem("admin"));
+                                string role = getValue(el.FirstChild.Attributes.GetNamedItem("role"));
+                                string premium = getValue(el.FirstChild.Attributes.GetNamedItem("premium"));
+                                string staff = getValue(el.FirstChild.Attributes.GetNamedItem("staff"));
+                                string color = getValue(el.FirstChild.Attributes.GetNamedItem("color"));
+                                user.Affiliation = affiliation ?? user.Affiliation;
+                                user.Role = role ?? user.Role;
+                                user.Premium = premium == null ? user.Premium : bool.Parse(premium);
+                                user.Staff = staff == null ? user.Staff : bool.Parse(staff);
+                                user.Color = color == null ? user.Color : System.Drawing.Color.FromArgb(Convert.ToInt32(color.Substring(1), 16));
+                            }
+                        }
+                    }
+                    else if (type == "unavailable")
+                    {
+                        room.UserLeft(userId);
+                    }
+
+
 				}
 			}
 		}

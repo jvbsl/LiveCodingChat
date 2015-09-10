@@ -6,8 +6,15 @@ using System.Collections.Generic;
 
 namespace LiveCodingChat.Xmpp
 {
+    public enum UserState
+    {
+        Available,
+        Offline
+    }
+    public delegate void UserStateChanged(User user,UserState state);
 	public class Room
 	{
+        public event UserStateChanged UserStateChanged;
 		private XmppTest xmpp;
 		public Room (string id,XmppTest xmpp)
 		{
@@ -17,6 +24,21 @@ namespace LiveCodingChat.Xmpp
 		}
 		public string ID{ get; private set; }
 		public Dictionary<string,User> Users{ get; private set; }
+        public void UserJoined(string id,User user)
+        {
+            Users.Add(id, user);
+            if (UserStateChanged != null)
+                UserStateChanged(user,UserState.Available);
+        }
+        public void UserLeft(string id)
+        {
+            if (Users.ContainsKey(id)){
+                if (UserStateChanged != null)
+                    UserStateChanged(Users[id],UserState.Offline);
+                Users.Remove(id);
+
+            }
+        }
 		public void JoinRoom()
 		{
 			StringBuilder sb = new StringBuilder ();
@@ -60,7 +82,15 @@ namespace LiveCodingChat.Xmpp
 
 			xmpp.Send (sb.ToString (), "iq", id, null);
 		}
-
+        public void SendMessage(string message,User user)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<message to='" + ID + "@chat.livecoding.tv/" + user.ID +"' from='" + xmpp.JID + "' type='chat' id='12' xmlns='jabber:client'>");
+            sb.Append(" <body xmlns='jabber:client'>" + message + "</body>");
+            sb.Append(" <x xmlns='jabber:x:event'><composing/></x>");
+            sb.Append("</message>");
+            xmpp.Send(sb.ToString());
+        }
 		public void SendMessage(string message)
 		{
 			StringBuilder sb = new StringBuilder ();

@@ -13,7 +13,7 @@ namespace NeinTom
 		public Room Room{ get; set; }
 		public void AddMessage(LiveCodingChat.Xmpp.MessageReceivedEventArgs e)
 		{
-			txtChatLog.AppendText ("[" + e.TimeStamp.ToString () + "]" + e.Nick + ": " + e.Message + "\n");
+			txtChatLog.AppendText ("[" + e.TimeStamp.ToString () + "]" + e.Nick + ": " + e.Message + "\r\n");
 			txtChatLog.ScrollToCaret ();
 		}
 		void TxtToSend_KeyDown (object sender, System.Windows.Forms.KeyEventArgs e)
