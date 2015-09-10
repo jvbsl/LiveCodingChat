@@ -43,12 +43,15 @@
     <Compile Include="frmChat.Designer.cs" />
     <Compile Include="ChatControl.cs" />
     <Compile Include="ChatControl.Designer.cs" />
+    <Compile Include="ChatLog.cs" />
+    <Compile Include="ChatMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LiveCodingChat\LiveCodingChat.csproj">
