@@ -4,7 +4,7 @@ namespace NeinTom
 {
 	public partial class frmChat : System.Windows.Forms.Form
 	{
-		private void InitializeComponents()
+		private void InitializeComponent()
 		{
 			tabControl = new CustomTabControl ();
 			tabControl.Dock = System.Windows.Forms.DockStyle.Fill;

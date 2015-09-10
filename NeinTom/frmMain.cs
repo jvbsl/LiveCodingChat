@@ -13,7 +13,7 @@ namespace NeinTom
 		Dictionary<string,frmChat> chatForms;
 		public frmMain ()
 		{
-			InitializeComponents ();
+			InitializeComponent ();
 			chatForms = new Dictionary<string,frmChat> ();
 			frmLogin frmLogin = new frmLogin ();
 			if (frmLogin.ShowDialog () != System.Windows.Forms.DialogResult.OK) {
@@ -59,11 +59,19 @@ namespace NeinTom
 		void Room_Client_MessageReceived (LiveCodingChat.Xmpp.Room room, LiveCodingChat.Xmpp.MessageReceivedEventArgs e)
 		{
 			if (chatForms.ContainsKey (room.ID)) {
-				chatForms [room.ID].Activate ();
-				chatForms [room.ID].AddMessage (e);
+                RoomMessage(chatForms[room.ID],e);
 			}
 		}
-
+        private void RoomMessage(frmChat frm,LiveCodingChat.Xmpp.MessageReceivedEventArgs e)
+        {
+            if (frm.InvokeRequired)
+            {
+                frm.Invoke(new MethodInvoker(delegate() { RoomMessage(frm, e); }));
+                return;
+            }
+            frm.Activate();
+            frm.AddMessage(e);
+        }
 			
 	}
 }

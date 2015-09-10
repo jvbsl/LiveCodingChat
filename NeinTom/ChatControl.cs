@@ -8,7 +8,7 @@ namespace NeinTom
 	{
 		public ChatControl ()
 		{
-			InitializeComponents ();
+			InitializeComponent ();
 		}
 		public Room Room{ get; set; }
 		public void AddMessage(LiveCodingChat.Xmpp.MessageReceivedEventArgs e)

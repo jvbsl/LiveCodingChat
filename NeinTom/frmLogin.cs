@@ -7,7 +7,7 @@ namespace NeinTom
 	{
 		public frmLogin ()
 		{
-			InitializeComponents ();
+			InitializeComponent ();
 
 			foreach (KeyValuePair<string,Type> pair in LiveCodingChat.LoginFactory.Instance.LoginMethods) {
 				cmbMethod.Items.Add (pair.Key);

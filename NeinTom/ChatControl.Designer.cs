@@ -3,41 +3,101 @@ namespace NeinTom
 {
 	public partial class ChatControl:System.Windows.Forms.UserControl
 	{
-		private void InitializeComponents()
+		private void InitializeComponent()
 		{
-			spltUserList = new System.Windows.Forms.SplitContainer();
-			spltUserList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spltUserList = new System.Windows.Forms.SplitContainer();
+            this.spltRoom = new System.Windows.Forms.SplitContainer();
+            this.txtChatLog = new System.Windows.Forms.TextBox();
+            this.txtToSend = new System.Windows.Forms.TextBox();
+            this.lstUsers = new System.Windows.Forms.ListBox();
+            ((System.ComponentModel.ISupportInitialize)(this.spltUserList)).BeginInit();
+            this.spltUserList.Panel1.SuspendLayout();
+            this.spltUserList.Panel2.SuspendLayout();
+            this.spltUserList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spltRoom)).BeginInit();
+            this.spltRoom.Panel1.SuspendLayout();
+            this.spltRoom.Panel2.SuspendLayout();
+            this.spltRoom.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // spltUserList
+            // 
+            this.spltUserList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spltUserList.Location = new System.Drawing.Point(0, 0);
+            this.spltUserList.Name = "spltUserList";
+            // 
+            // spltUserList.Panel1
+            // 
+            this.spltUserList.Panel1.Controls.Add(this.spltRoom);
+            // 
+            // spltUserList.Panel2
+            // 
+            this.spltUserList.Panel2.Controls.Add(this.lstUsers);
+            this.spltUserList.Size = new System.Drawing.Size(150, 150);
+            this.spltUserList.SplitterDistance = 93;
+            this.spltUserList.TabIndex = 0;
+            // 
+            // spltRoom
+            // 
+            this.spltRoom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.spltRoom.Location = new System.Drawing.Point(0, 0);
+            this.spltRoom.Name = "spltRoom";
+            this.spltRoom.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // spltRoom.Panel1
+            // 
+            this.spltRoom.Panel1.Controls.Add(this.txtChatLog);
+            // 
+            // spltRoom.Panel2
+            // 
+            this.spltRoom.Panel2.Controls.Add(this.txtToSend);
+            this.spltRoom.Size = new System.Drawing.Size(93, 150);
+            this.spltRoom.SplitterDistance = 115;
+            this.spltRoom.TabIndex = 0;
+            // 
+            // txtChatLog
+            // 
+            this.txtChatLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtChatLog.Location = new System.Drawing.Point(0, 0);
+            this.txtChatLog.Multiline = true;
+            this.txtChatLog.Name = "txtChatLog";
+            this.txtChatLog.Size = new System.Drawing.Size(93, 115);
+            this.txtChatLog.TabIndex = 0;
+            // 
+            // txtToSend
+            // 
+            this.txtToSend.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtToSend.Location = new System.Drawing.Point(0, 0);
+            this.txtToSend.Multiline = true;
+            this.txtToSend.Name = "txtToSend";
+            this.txtToSend.Size = new System.Drawing.Size(93, 31);
+            this.txtToSend.TabIndex = 0;
+            this.txtToSend.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TxtToSend_KeyDown);
+            // 
+            // lstUsers
+            // 
+            this.lstUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstUsers.Location = new System.Drawing.Point(0, 0);
+            this.lstUsers.Name = "lstUsers";
+            this.lstUsers.Size = new System.Drawing.Size(53, 150);
+            this.lstUsers.TabIndex = 0;
+            // 
+            // ChatControl
+            // 
+            this.Controls.Add(this.spltUserList);
+            this.Name = "ChatControl";
+            this.spltUserList.Panel1.ResumeLayout(false);
+            this.spltUserList.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.spltUserList)).EndInit();
+            this.spltUserList.ResumeLayout(false);
+            this.spltRoom.Panel1.ResumeLayout(false);
+            this.spltRoom.Panel1.PerformLayout();
+            this.spltRoom.Panel2.ResumeLayout(false);
+            this.spltRoom.Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.spltRoom)).EndInit();
+            this.spltRoom.ResumeLayout(false);
+            this.ResumeLayout(false);
 
-			spltUserList.Orientation = System.Windows.Forms.Orientation.Vertical;
-
-			spltRoom = new System.Windows.Forms.SplitContainer ();
-			spltRoom.Dock = System.Windows.Forms.DockStyle.Fill;
-			spltRoom.Orientation = System.Windows.Forms.Orientation.Horizontal;
-
-
-			txtChatLog = new System.Windows.Forms.TextBox ();
-			txtChatLog.Multiline = true;
-			txtChatLog.Dock = System.Windows.Forms.DockStyle.Fill;
-
-
-			txtToSend = new System.Windows.Forms.TextBox ();
-			txtToSend.Multiline = true;
-			txtToSend.Dock = System.Windows.Forms.DockStyle.Fill;
-			txtToSend.KeyDown += TxtToSend_KeyDown;
-
-
-			lstUsers = new System.Windows.Forms.ListBox ();
-			lstUsers.Dock = System.Windows.Forms.DockStyle.Fill;
-
-			spltRoom.Panel1.Controls.Add (txtChatLog);
-
-			spltRoom.Panel2.Controls.Add (txtToSend);
-
-
-			spltUserList.Panel1.Controls.Add (spltRoom);
-			spltUserList.Panel2.Controls.Add (lstUsers);
-
-			this.Controls.Add(spltUserList);
 		}
 
 

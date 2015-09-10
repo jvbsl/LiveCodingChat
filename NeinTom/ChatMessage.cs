@@ -30,6 +30,7 @@ namespace NeinTom
 		}
 		private void ParseXml(XmlElement element)
 		{
+            return;
 			Text = element.InnerText;
 			if (element.HasChildNodes) {//TODO: remove child nodes...everyone gets a part
 				parts = new List<ChatMessagePart> ();

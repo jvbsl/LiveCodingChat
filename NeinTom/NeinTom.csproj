@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -33,21 +33,42 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="ChatControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChatControl.Designer.cs">
+      <DependentUpon>ChatControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmChat.Designer.cs">
+      <DependentUpon>frmChat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="frmMain.cs" />
-    <Compile Include="frmMain.Designer.cs" />
-    <Compile Include="frmLogin.cs" />
-    <Compile Include="frmLogin.Designer.cs" />
-    <Compile Include="CustomTabControl.cs" />
-    <Compile Include="frmChat.cs" />
-    <Compile Include="frmChat.Designer.cs" />
-    <Compile Include="ChatControl.cs" />
-    <Compile Include="ChatControl.Designer.cs" />
-    <Compile Include="ChatLog.cs" />
+    <Compile Include="CustomTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ChatLog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ChatMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
     <Reference Include="System.Windows.Forms" />
@@ -58,5 +79,13 @@
       <Project>{B33D8D4C-F48F-4375-A2D6-5A060C77CFD9}</Project>
       <Name>LiveCodingChat</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ChatControl.resx">
+      <DependentUpon>ChatControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

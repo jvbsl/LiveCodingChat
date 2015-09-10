@@ -4,7 +4,7 @@ namespace NeinTom
 {
 	public partial class frmMain:System.Windows.Forms.Form
 	{
-		private void InitializeComponents()
+		private void InitializeComponent()
 		{
 			lstUsers = new System.Windows.Forms.ListBox ();
 			lstUsers.Dock = System.Windows.Forms.DockStyle.Fill;

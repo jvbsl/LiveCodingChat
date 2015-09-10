@@ -11,7 +11,7 @@ namespace NeinTom
 	{
 		public frmChat ()
 		{
-			InitializeComponents ();
+			InitializeComponent ();
 		}
 		public TabPage CreateTabPage(Room room)
 		{
@@ -54,12 +54,6 @@ namespace NeinTom
 		}
 		public void AddMessage(LiveCodingChat.Xmpp.MessageReceivedEventArgs e)
 		{
-			if (InvokeRequired) {
-				this.Invoke (new MethodInvoker (delegate() {
-					AddMessage(e);
-				}));
-				return;
-			}
 			int tab = 0;
 			ChatControl cht = (ChatControl)tabControl.TabPages [tab].Controls [0];
 			cht.AddMessage (e);
