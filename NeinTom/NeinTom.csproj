@@ -88,8 +88,4 @@
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Debug\" />
-    <Folder Include="obj\x86\Debug\" />
-  </ItemGroup>
 </Project>
