@@ -100,7 +100,7 @@ namespace NeinTom
             // 
             this.AcceptButton = this.btnOk;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(184, 125);
+            this.ClientSize = new System.Drawing.Size(184, 126);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblUsername);
