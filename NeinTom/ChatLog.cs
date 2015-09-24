@@ -2,12 +2,14 @@
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Drawing;
+using LiveCodingChat.Xmpp;
 
 namespace NeinTom
 {
 	public class ChatLog : UserControl
 	{
-		List<LiveCodingChat.Xmpp.MessageReceivedEventArgs> messages;
+		CircularBuffer<MessageReceivedEventArgs> messages;
+		CircularBuffer<MessageInfo> messageInfos;
 		private bool needsResize;
 		Font font;
 		Font userNameFont;
@@ -15,7 +17,7 @@ namespace NeinTom
 		{
 			SetStyle (ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
 
-			messages = new List<LiveCodingChat.Xmpp.MessageReceivedEventArgs> ();
+			messages = new CircularBuffer<LiveCodingChat.Xmpp.MessageReceivedEventArgs> (50);
 			font = new Font ("Arial",12.0f);
 			userNameFont = new Font (font, FontStyle.Bold);
 			needsResize = true;
@@ -25,10 +27,10 @@ namespace NeinTom
 		public string TimeStampFormat{ get; set; }
 		private void MeasureTexts(Graphics g)
 		{
+			messageInfos.Clear ();
 			float currentPosition = ClientSize.Height;
-			for (int i = messages.Count - 1; i >= Math.Max(0,messages.Count - 20); i--) {//TODO: longer Log?
+			foreach(MessageReceivedEventArgs msg in messages){
 				float leftMargin = 0.0f, height = 0.0f;
-				LiveCodingChat.Xmpp.MessageReceivedEventArgs msg = messages [i];
 				if (ShowTimeStamp) {
 					string timestamp = "["+msg.TimeStamp.ToString (TimeStampFormat)+"]";
 					SizeF s = g.MeasureString (timestamp, userNameFont);
@@ -41,6 +43,7 @@ namespace NeinTom
 				SizeF msgSize = MeasureMessage (msg.Message, g,leftMargin);
 				height = Math.Max (height, msgSize.Height);
 				currentPosition -= height;
+				messageInfos.Add (new MessageInfo (currentPosition));
 			}
 		}
 		private SizeF MeasureMessage(string message,Graphics g,float leftMargin)
@@ -55,7 +58,7 @@ namespace NeinTom
 		{
 			if (needsResize)
 				MeasureTexts (e.Graphics);
-			for (int i = messages.Count - 1; i >= 0; i--) {
+			foreach (MessageReceivedEventArgs m in messages) {
 				
 			}
 		}

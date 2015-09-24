@@ -65,6 +65,8 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ChatMessage.cs" />
+    <Compile Include="CircularBuffer.cs" />
+    <Compile Include="MessageInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
