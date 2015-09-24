@@ -42,6 +42,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Livecoding\WinLiveLogin.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HttpHelper.cs" />
