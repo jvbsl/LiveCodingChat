@@ -8,8 +8,7 @@ namespace NeinTom
 {
 	public class ChatLog : UserControl
 	{
-		CircularBuffer<MessageReceivedEventArgs> messages;
-		CircularBuffer<MessageInfo> messageInfos;
+		CircularBuffer<ChatMessage> messages;
 		private bool needsResize;
 		Font font;
 		Font userNameFont;
@@ -17,8 +16,8 @@ namespace NeinTom
 		{
 			SetStyle (ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
 
-			messages = new CircularBuffer<LiveCodingChat.Xmpp.MessageReceivedEventArgs> (50);
-			font = new Font ("Arial",12.0f);
+			messages = new CircularBuffer<ChatMessage> (50);
+			font = new Font (new FontFamily("Arial"),12.0f);
 			userNameFont = new Font (font, FontStyle.Bold);
 			needsResize = true;
 			this.Paint += ChatLog_Paint;
@@ -27,23 +26,10 @@ namespace NeinTom
 		public string TimeStampFormat{ get; set; }
 		private void MeasureTexts(Graphics g)
 		{
-			messageInfos.Clear ();
 			float currentPosition = ClientSize.Height;
-			foreach(MessageReceivedEventArgs msg in messages){
-				float leftMargin = 0.0f, height = 0.0f;
-				if (ShowTimeStamp) {
-					string timestamp = "["+msg.TimeStamp.ToString (TimeStampFormat)+"]";
-					SizeF s = g.MeasureString (timestamp, userNameFont);
-					leftMargin += s.Width;
-					height = Math.Max (height, s.Height);
-				}
-				SizeF userNameSize = g.MeasureString (msg.Nick, userNameFont);
-				leftMargin += userNameSize.Width;
-				height = Math.Max (height, userNameSize.Height);
-				SizeF msgSize = MeasureMessage (msg.Message, g,leftMargin);
-				height = Math.Max (height, msgSize.Height);
-				currentPosition -= height;
-				messageInfos.Add (new MessageInfo (currentPosition));
+			foreach(ChatMessage msg in messages){
+				msg.Parse (g,new SizeF(ClientSize.Width,currentPosition));
+				currentPosition -= msg.Size.Height;
 			}
 		}
 		private SizeF MeasureMessage(string message,Graphics g,float leftMargin)
@@ -54,12 +40,16 @@ namespace NeinTom
 			return g.MeasureString (message,font, new SizeF (ClientSize.Width - leftMargin, float.MaxValue), strFormat);
 			//g.MeasureString(message,);
 		}
+		public void AddMessage(ChatMessage message)
+		{
+			messages.Add (message);
+		}
 		private void ChatLog_Paint (object sender, PaintEventArgs e)
 		{
 			if (needsResize)
 				MeasureTexts (e.Graphics);
-			foreach (MessageReceivedEventArgs m in messages) {
-				
+			foreach (ChatMessage m in messages) {
+				m.Draw (e.Graphics, m.Position, m.Size);
 			}
 		}
 	}

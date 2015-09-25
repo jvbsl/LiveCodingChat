@@ -16,9 +16,12 @@ namespace LiveCodingChat
         public void LoginAsync(string username, string password, ref CookieContainer cookies)
         {
             Console.WriteLine("Login WinLive");
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("https://www.livecoding.tv/accounts/windowslive/login/?process=login");
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("https://www.livecoding.tv/accounts/windowslive/login/?process=log");
             request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240";
             request.CookieContainer = cookies;
+			request.AllowAutoRedirect = true;
+			request.Headers ["Upgrade-Insecure-Requests"] = "1";
+			request.Referer = "https://www.livecoding.tv/accounts/login/";
             request.BeginGetResponse(EndGetResponse, new object[] { request, username, password, cookies });
 
         }
@@ -32,6 +35,17 @@ namespace LiveCodingChat
 
             HttpWebRequest request = (HttpWebRequest)obj[0];
             HttpWebResponse response = (HttpWebResponse)request.EndGetResponse(res);
+			if (response.StatusCode == HttpStatusCode.Found) {
+				
+				request = (HttpWebRequest)HttpWebRequest.Create(response.Headers["Location"]);
+				request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.10240";
+				request.CookieContainer = cookies;
+				request.AllowAutoRedirect = false;
+				request.Referer = response.ResponseUri.ToString();
+				request.Headers ["Upgrade-Insecure-Requests"] = "1";
+				request.BeginGetResponse(EndGetResponse, new object[] { request, username, password, cookies });
+				return;
+			}
             string data;
             using (System.IO.StreamReader sr = new System.IO.StreamReader(response.GetResponseStream()))
             {
@@ -82,6 +96,7 @@ namespace LiveCodingChat
 
             postData.Add("loginfmt", username);
             postData.Add("passwd", password);
+			postData.Add ("KMSI", "1");
             postData.Add("SI", "Anmelden");
             postData.Add("login", username.ToLower());
             postData.Add("type", "11");
@@ -90,7 +105,7 @@ namespace LiveCodingChat
             postData.Add("idsbho", "1");
             postData.Add("sso", "0");
             postData.Add("NewUser", "1");
-            postData.Add("LoginOptions", "3");
+            postData.Add("LoginOptions", "1");
             postData.Add("i1", "0");
             postData.Add("i2", "1");
             postData.Add("i3", "1000"); //LoginTime

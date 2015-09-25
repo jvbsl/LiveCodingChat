@@ -34,6 +34,7 @@ namespace NeinTom
 			if (buffer[currentIndex] != null)
 				ItemThrown(buffer[currentIndex]);
 			buffer[currentIndex++] = item;
+			count++;
 		}
 		public void Clear()
 		{
@@ -151,6 +152,8 @@ namespace NeinTom
 		}
 		public bool MoveNext()
 		{
+			if (count == 0)
+				return false;
 			index--;
 			moved++;
 			if (count > currentIndex)
@@ -159,9 +162,9 @@ namespace NeinTom
 					index = buffer.Length - 1;
 				
 			}
-			if (buffer [index].Equals(default(T)))
-				return MoveNext ();//TODO:verify
-			return moved < count;
+			/*if (buffer [index].Equals(default(T)))
+				return MoveNext ();//TODO:verify*/
+			return moved <= count;
 		}
 		public void Reset()
 		{

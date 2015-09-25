@@ -12,7 +12,24 @@ namespace NeinTom
 		public frmChat ()
 		{
 			InitializeComponent ();
+
+			TestControl ();//TODO: remove
 		}
+
+		public void TestControl()
+		{
+			TabPage page = new TabPage ();
+			page.Text = "TestPage";
+			ChatLog log = new ChatLog ();
+			log.Dock = DockStyle.Fill;
+			page.Controls.Add (log);
+			User user = new User ("testid");
+			user.Color = Color.Red;
+			log.AddMessage (new ChatMessage (user, "<message from='bobstriker@chat.livecoding.tv/jvbsl' to='jvbsl@livecoding.tv/web-bobstriker-s56WnvDq-popout' type='groupchat' id='87'><body xmlns='jabber:client'>zumindest <b>zeit<i>lich</i></b> gesehen</body><x xmlns='jabber:x:event'><composing/></x></message>"));
+			log.AddMessage (new ChatMessage (user, "<message from='bobstriker@chat.livecoding.tv/jvbsl' to='jvbsl@livecoding.tv/web-bobstriker-s56WnvDq-popout' type='groupchat' id='87'><body xmlns='jabber:client'>haha <b>test<i>5873</i></b> bla</body><x xmlns='jabber:x:event'><composing/></x></message>"));
+			AddTabPage (page);
+		}
+
 		public TabPage CreateTabPage(Room room)
 		{
 			TabPage page = new TabPage ();
