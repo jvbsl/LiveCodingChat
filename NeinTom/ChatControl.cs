@@ -11,10 +11,14 @@ namespace NeinTom
 			InitializeComponent ();
 		}
 		public Room Room{ get; set; }
-		public void AddMessage(LiveCodingChat.Xmpp.MessageReceivedEventArgs e)
+		public void AddMessage(LiveCodingChat.Xmpp.MessageReceivedEventArgs e, ChatRoom room)
 		{
-			txtChatLog.AppendText ("[" + e.TimeStamp.ToString () + "]" + e.Nick + ": " + e.Message + "\r\n");
-			txtChatLog.ScrollToCaret ();
+    			string Username = room.JID.Split('@')[0];
+    			if (e.Message.Contains("@" + Username) || !e.Message..Contains("@"))
+			{
+				txtChatLog.AppendText("[" + e.TimeStamp.ToString() + "]" + e.Nick + ": " + e.Message + "\r\n");
+				txtChatLog.ScrollToCaret();
+    			}
 		}
 		void TxtToSend_KeyDown (object sender, System.Windows.Forms.KeyEventArgs e)
 		{
