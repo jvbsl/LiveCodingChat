@@ -70,7 +70,7 @@ namespace NeinTom
                 return;
             }
             frm.Activate();
-            frm.AddMessage(e);
+            frm.AddMessage(e,room);
         }
 			
 	}
