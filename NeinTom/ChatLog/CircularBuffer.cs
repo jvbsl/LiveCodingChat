@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 namespace NeinTom
 {
+    
 	public class CircularBuffer<T>:IList<T>,IEnumerable<T>
 	{
-		private T[] buffer;
+        public delegate void ItemThrownDelegate(object sender, T thrown);
+        public event ItemThrownDelegate ItemThrown;
+        private T[] buffer;
 		private int currentIndex;
 		private int count;
 		public CircularBuffer(int capacity)
@@ -26,15 +29,15 @@ namespace NeinTom
 				return -1;
 			return realIndex;
 		}
-		public void ItemThrown(T item)
-		{
-		}
 		public void Add(T item)
 		{
 			if (buffer[currentIndex] != null)
-				ItemThrown(buffer[currentIndex]);
+				ItemThrown(this,buffer[currentIndex]);
 			buffer[currentIndex++] = item;
-			count++;
+
+            currentIndex = currentIndex % buffer.Length;
+            if (count < buffer.Length)
+			    count++;
 		}
 		public void Clear()
 		{
@@ -70,7 +73,7 @@ namespace NeinTom
 			if (realIndex < 0)
 				throw new IndexOutOfRangeException();
 			if (buffer [realIndex].Equals(default(T)))
-				ItemThrown (buffer [realIndex]);//TODO: really throw out?
+				ItemThrown (this,buffer [realIndex]);//TODO: really throw out?
 			buffer [realIndex] = item;
 		}
 		public bool IsFixedSize

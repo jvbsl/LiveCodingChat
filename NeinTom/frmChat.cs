@@ -13,21 +13,22 @@ namespace NeinTom
 		{
 			InitializeComponent ();
 
-			TestControl ();//TODO: remove
+			//TestControl ();//TODO: remove
 		}
 
 		public void TestControl()
 		{
 			TabPage page = new TabPage ();
 			page.Text = "TestPage";
-			ChatLog log = new ChatLog ();
+			ChatLogControl log = new ChatLogControl ();
 			log.Dock = DockStyle.Fill;
 			page.Controls.Add (log);
 			User user = new User ("testid");
 			user.Color = Color.Red;
-			log.AddMessage (new ChatMessage (user, "<message from='bobstriker@chat.livecoding.tv/jvbsl' to='jvbsl@livecoding.tv/web-bobstriker-s56WnvDq-popout' type='groupchat' id='87'><body xmlns='jabber:client'>zumindest <b>zeit<i>lich</i></b> gesehen</body><x xmlns='jabber:x:event'><composing/></x></message>"));
-			log.AddMessage (new ChatMessage (user, "<message from='bobstriker@chat.livecoding.tv/jvbsl' to='jvbsl@livecoding.tv/web-bobstriker-s56WnvDq-popout' type='groupchat' id='87'><body xmlns='jabber:client'>haha <b>test<i>5873</i></b> bla</body><x xmlns='jabber:x:event'><composing/></x></message>"));
-			AddTabPage (page);
+			log.AddMessage (new ChatMessage (log,user, "zumindest <b>zeit<i>lich</i></b> gesehen"));
+			log.AddMessage (new ChatMessage (log,user, "haha <b>test<i>5873</i></b> bla"));
+            log.AddMessage(new ChatMessage(log, user, "unformatierter test text bla susch sieht das hier niemals"));
+            AddTabPage (page);
 		}
 
 		public TabPage CreateTabPage(Room room)
@@ -69,11 +70,18 @@ namespace NeinTom
 				return;
 			this.Text = "Chat - " + tabControl.SelectedTab.Text;
 		}
+        public void UserStateChanged(User user,UserState state)
+        {
+            int tab = 0;
+            ChatControl cht = (ChatControl)tabControl.TabPages[tab].Controls[0];
+            cht.UserStateChanged(user,state);
+        }
 		public void AddMessage(LiveCodingChat.Xmpp.MessageReceivedEventArgs e)
 		{
 			int tab = 0;
 			ChatControl cht = (ChatControl)tabControl.TabPages [tab].Controls [0];
 			cht.AddMessage (e);
+           
 		}
 	}
 }

@@ -29,7 +29,7 @@ namespace NeinTom
 
 		void Session_SessionAutenticated (object sender, EventArgs e)
 		{
-			session.BeginOpenChat("bobstriker",EndOpenChat,null);
+			session.BeginOpenChat("jvbsl",EndOpenChat,null);
 		}
 
 		private void EndOpenChat(IAsyncResult res)
@@ -41,9 +41,11 @@ namespace NeinTom
 				return;
 			}
 			room.Client.MessageReceived += Room_Client_MessageReceived;
+            room.Room.UserStateChanged += Room_UserStateChanged;
 			CreateForm ();
 		}
-		private void CreateForm()
+
+        private void CreateForm()
 		{
 			if (this.InvokeRequired) {
 				this.Invoke (new MethodInvoker(delegate() {
@@ -62,6 +64,22 @@ namespace NeinTom
                 RoomMessage(chatForms[room.ID],e);
 			}
 		}
+        private void Room_UserStateChanged(LiveCodingChat.Xmpp.Room room, LiveCodingChat.User user, LiveCodingChat.Xmpp.UserState state)
+        {
+            if (chatForms.ContainsKey(room.ID))
+            {
+                RoomStateChanged(chatForms[room.ID], room,user,state);
+            }
+        }
+        private void RoomStateChanged(frmChat frm,LiveCodingChat.Xmpp.Room room, LiveCodingChat.User user, LiveCodingChat.Xmpp.UserState state)
+        {
+            if (frm.InvokeRequired)
+            {
+                frm.Invoke(new MethodInvoker(delegate () { RoomStateChanged(frm, room,user,state); }));
+                return;
+            }
+            frm.UserStateChanged(user, state);
+        }
         private void RoomMessage(frmChat frm,LiveCodingChat.Xmpp.MessageReceivedEventArgs e)
         {
             if (frm.InvokeRequired)

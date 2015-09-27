@@ -20,7 +20,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>full</DebugType>
@@ -36,7 +36,12 @@
     <Compile Include="ChatControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ChatControl.Designer.cs" />
+    <Compile Include="ChatControl.Designer.cs">
+      <DependentUpon>ChatControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChatLog\LinkPart.cs" />
+    <Compile Include="ChatLog\RootPart.cs" />
+    <Compile Include="ChatLog\SmileyPart.cs" />
     <Compile Include="frmChat.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,12 +58,19 @@
     <Compile Include="CustomTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ChatLog\ChatLog.cs" />
+    <Compile Include="ChatLog\ChatLogControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ChatLog\CircularBuffer.cs" />
     <Compile Include="ChatLog\ChatMessage.cs" />
     <Compile Include="ChatLog\ChatMessagePart.cs" />
     <Compile Include="ChatLog\TextPart.cs" />
     <Compile Include="ChatLog\ContainerPart.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -74,6 +86,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ChatLog\" />
+    <EmbeddedResource Include="ChatControl.resx">
+      <DependentUpon>ChatControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChatLog\ChatLogControl.resx">
+      <DependentUpon>ChatLogControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Nimm einfach den zu Testzwecken.png" />
   </ItemGroup>
 </Project>

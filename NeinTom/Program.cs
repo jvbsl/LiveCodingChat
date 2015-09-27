@@ -7,7 +7,7 @@ namespace NeinTom
 		public static void Main(string[] args)
 		{
 			Application.EnableVisualStyles ();
-			Application.Run (new frmChat ());
+			Application.Run (new frmMain ());
 		}
 	}
 }
