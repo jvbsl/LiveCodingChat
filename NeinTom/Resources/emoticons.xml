@@ -1,0 +1,378 @@
+<?xml version='1.0'?>
+<messaging-emoticon-map>
+    <emoticon file="angel.gif">
+        <string>(angel)</string>
+    </emoticon>
+    <emoticon file="angry.gif">
+        <string>:@</string>
+        <string>:-@</string>
+        <string>:=@</string>
+        <string>x(</string>
+        <string>x-(</string>
+        <string>x=(</string>
+        <string>X(</string>
+        <string>X-(</string>
+        <string>X=(</string>
+    </emoticon>
+    <emoticon file="beer.gif">
+        <string>(beer)</string>
+    </emoticon>
+    <emoticon file="blush.gif">
+        <string>(blush)</string>
+        <string>:$</string>
+        <string>:-$</string>
+        <string>:=$</string>
+        <string>:"></string>
+    </emoticon>
+    <emoticon file="bow.gif">
+        <string>(bow)</string>
+    </emoticon>
+    <emoticon file="boxing.gif">
+        <string>(punch)</string>
+    </emoticon>
+    <emoticon file="cake.gif">
+        <string>(^)</string>
+        <string>(cake)</string>
+    </emoticon>
+    <emoticon file="brokenheart.gif">
+        <string>(u)</string>
+        <string>(U)</string>
+    </emoticon>
+    <emoticon file="callme.gif">
+        <string>(call)</string>
+    </emoticon>
+    <emoticon file="cash.gif">
+        <string>(cash)</string>
+        <string>(mo)</string>
+        <string>($)</string>
+    </emoticon>
+    <emoticon file="cellphone.gif">
+        <string>(mp)</string>
+        <string>(ph)</string>
+    </emoticon>
+    <emoticon file="clapping.gif">
+        <string>(clap)</string>
+    </emoticon>
+    <emoticon file="coffee.gif">
+        <string>(coffee)</string>
+    </emoticon>
+    <emoticon file="cool.gif">
+        <string>8)</string>
+        <string>8=)</string>
+        <string>8-)</string>
+        <string>B)</string>
+        <string>B=)</string>
+        <string>B-)</string>
+        <string>(cool)</string>
+    </emoticon>
+    <emoticon file="crying.gif">
+        <string>;(</string>
+        <string>;-(</string>
+        <string>;=(</string>
+    </emoticon>
+    <emoticon file="dance.gif">
+        <string>(dance)</string>
+        <string>\o/</string>
+        <string>\:D/</string>
+        <string>\:d/</string>
+    </emoticon>
+    <emoticon file="devil.gif">
+        <string>(devil)</string>
+        <string>:666:</string>
+    </emoticon>
+    <emoticon file="doh.gif">
+        <string>(doh)</string>
+    </emoticon>
+    <emoticon file="drink.gif">
+        <string>(d)</string>
+        <string>(D)</string>
+    </emoticon>
+    <emoticon file="dull.gif">
+        <string>|(</string>
+        <string>|-(</string>
+        <string>|=(</string>
+    </emoticon>
+    <emoticon file="emo.gif">
+        <string>(emo)</string>
+    </emoticon>
+    <emoticon file="evilgrin.gif">
+        <string>]:)</string>
+        <string>>:)</string>
+        <string>(grin)</string>
+    </emoticon>
+    <emoticon file="flex.gif">
+        <string>(muscle)</string>
+        <string>(flex)</string>
+    </emoticon>
+    <emoticon file="flower.gif">
+        <string>(f)</string>
+        <string>(F)</string>
+    </emoticon>
+    <emoticon file="giggle.gif">
+        <string>(giggle)</string>
+        <string>(chuckle)</string>
+    </emoticon>
+    <emoticon file="handshake.gif">
+        <string>(handshake)</string>
+    </emoticon>
+    <emoticon file="happy.gif">
+        <string>(happy)</string>
+    </emoticon>
+    <emoticon file="heart.gif">
+        <string>(h)</string>
+        <string>(H)</string>
+        <string>(l)</string>
+        <string>(L)</string>
+    </emoticon>
+    <emoticon file="hi.gif">
+        <string>(hi)</string>
+        <string>(wave)</string>
+    </emoticon>
+    <emoticon file="hiddenbandit.gif">
+        <string>(bandit)</string>
+    </emoticon>
+    <emoticon file="hiddenbug.gif">
+        <string>(bug)</string>
+    </emoticon>
+    <emoticon file="hiddendrunk.gif">
+        <string>(drunk)</string>
+    </emoticon>
+    <emoticon file="hiddenfinger.gif">
+        <string>(finger)</string>
+    </emoticon>
+    <emoticon file="hiddenfubar.gif">
+        <string>(fubar)</string>
+    </emoticon>
+    <emoticon file="hiddenheadbang.gif">
+        <string>(headbang)</string>
+        <string>(banghead)</string>
+    </emoticon>
+    <emoticon file="hiddenmooning.gif">
+        <string>(mooning)</string>
+    </emoticon>
+    <emoticon file="hiddenpoolparty.gif">
+        <string>(poolparty)</string>
+    </emoticon>
+    <emoticon file="hiddenrockout.gif">
+        <string>(rock)</string>
+    </emoticon>
+    <emoticon file="hiddensmoking.gif">
+        <string>(smoking)</string>
+        <string>(smoke)</string>
+        <string>(ci)</string>
+    </emoticon>
+    <emoticon file="hiddensquirrell.gif">
+        <string>(heidy)</string>
+    </emoticon>
+    <emoticon file="hiddenswear.gif">
+        <string>(swear)</string>
+    </emoticon>
+    <emoticon file="hiddentmi.gif">
+        <string>(tmi)</string>
+    </emoticon>
+    <emoticon file="hiddentoivo.gif">
+        <string>(toivo)</string>
+    </emoticon>
+    <emoticon file="inlove.gif">
+        <string>(inlove)</string>
+    </emoticon>
+    <emoticon file="itwasntme.gif">
+        <string>(wasntme)</string>
+    </emoticon>
+    <emoticon file="jealous.gif">
+        <string>(envy)</string>
+    </emoticon>
+    <emoticon file="kiss.gif">
+        <string>:*</string>
+        <string>:=*</string>
+        <string>:-*</string>
+    </emoticon>
+    <emoticon file="laughing.gif">
+        <string>:D</string>
+        <string>:=D</string>
+        <string>:-D</string>
+        <string>:d</string>
+        <string>:=d</string>
+        <string>:-d</string>
+    </emoticon>
+    <emoticon file="mail.gif">
+        <string>(e)</string>
+        <string>(m)</string>
+    </emoticon>
+    <emoticon file="makeup.gif">
+        <string>(makeup)</string>
+        <string>(kate)</string>
+    </emoticon>
+    <emoticon file="mmm.gif">
+        <string>(mm)</string>
+    </emoticon>
+    <emoticon file="movie.gif">
+        <string>(~)</string>
+        <string>(film)</string>
+        <string>(movie)</string>
+    </emoticon>
+    <emoticon file="music.gif">
+        <string>(music)</string>
+    </emoticon>
+    <emoticon file="nerd.gif">
+        <string>8-|</string>
+        <string>B-|</string>
+        <string>8|</string>
+        <string>B|</string>
+        <string>8=|</string>
+        <string>B=|</string>
+        <string>(nerd)</string>
+    </emoticon>
+    <emoticon file="ninja.gif">
+        <string>(ninja)</string>
+    </emoticon>
+    <emoticon file="no.gif">
+        <string>(n)</string>
+        <string>(N)</string>
+    </emoticon>
+    <emoticon file="nod.gif">
+        <string>(nod)</string>
+    </emoticon>
+    <emoticon file="nospeak.gif">
+        <string>:x</string>
+        <string>:-x</string>
+        <string>:X</string>
+        <string>:-X</string>
+        <string>:#</string>
+        <string>:-#</string>
+        <string>:=x</string>
+        <string>:=X</string>
+        <string>:=#</string>
+    </emoticon>
+    <emoticon file="party.gif">
+        <string>(party)</string>
+    </emoticon>
+    <emoticon file="pizza.gif">
+        <string>(pizza)</string>
+        <string>(pi)</string>
+    </emoticon>
+    <emoticon file="puke.gif">
+        <string>(puke)</string>
+        <string>:&amp;</string>
+        <string>:-&amp;</string>
+        <string>:=&amp;</string>
+    </emoticon>
+      <emoticon file="smile.gif">
+        <string>:)</string>
+        <string/>
+        <string>:=)</string>
+        <string/>
+        <string>:-)</string>
+    </emoticon>
+    <emoticon file="rain.gif">
+        <string>(rain)</string>
+        <string>(london)</string>
+        <string>(st)</string>
+    </emoticon>
+    <emoticon file="rofl.gif">
+        <string>(rofl)</string>
+    </emoticon>
+    <emoticon file="shakeno.gif">
+        <string>(shake)</string>
+    </emoticon>
+    <emoticon file="sad.gif">
+        <string>:(</string>
+        <string/>
+        <string>:=(</string>
+        <string/>
+        <string>:-(</string>
+    </emoticon>
+    <emoticon file="skype.gif">
+        <string>(skype)</string>
+        <string>(ss)</string>
+    </emoticon>
+    <emoticon file="sleepy.gif">
+        <string>|-)</string>
+        <string>I-)</string>
+        <string>I=)</string>
+        <string>(snooze)</string>
+    </emoticon>
+    <emoticon file="smirk.gif">
+        <string>(smirk)</string>
+    </emoticon>
+    <emoticon file="speechless.gif">
+        <string>:|</string>
+        <string>:=|</string>
+        <string>:-|</string>
+    </emoticon>
+    <emoticon file="star.gif">
+        <string>(*)</string>
+    </emoticon>
+    <emoticon file="sun.gif">
+        <string>(sun)</string>
+    </emoticon>
+    <emoticon file="sweating.gif">
+        <string>(sweat)</string>
+        <string>(:|</string>
+    </emoticon>
+    <emoticon file="talking.gif">
+        <string>(talk)</string>
+    </emoticon>
+    <emoticon file="thinking.gif">
+        <string>(think)</string>
+        <string>:?</string>
+        <string>:-?</string>
+        <string>:=?</string>
+    </emoticon>
+    <emoticon file="time.gif">
+        <string>(o)</string>
+        <string>(O)</string>
+        <string>(time)</string>
+    </emoticon>
+    <emoticon file="tired.gif">
+        <string>(yawn)</string>
+        <string>|-()</string>
+    </emoticon>
+    <emoticon file="tongue out.gif">
+        <string>:P</string>
+        <string>:=P</string>
+        <string>:-P</string>
+        <string>:p</string>
+        <string>:=p</string>
+        <string>:-p</string>
+    </emoticon>
+    <emoticon file="wait.gif">
+        <string>(wait)</string>
+    </emoticon>
+    <emoticon file="whew.gif">
+        <string>(whew)</string>
+    </emoticon>
+    <emoticon file="wink.gif">
+        <string>;)</string>
+        <string>;-)</string>
+    </emoticon>
+    <emoticon file="wondering.gif">
+        <string>:^)</string>
+        <string>(wondering)</string>
+    </emoticon>
+    <emoticon file="worried.gif">
+        <string>:S</string>
+        <string>:-S</string>
+        <string>:=S</string>
+        <string>:s</string>
+        <string>:-s</string>
+        <string>:=s</string>
+    </emoticon>
+    <emoticon file="yes.gif">
+        <string>(Y)</string>
+        <string>(y)</string>
+    </emoticon>
+    <emoticon file="bearhug.gif">
+        <string>(bear)</string>
+        <string>(hug)</string>
+    </emoticon>
+    <emoticon file="surprised.gif">
+        <string>:O</string>
+        <string>:o</string>
+        <string>:=o</string>
+        <string>:-o</string>
+        <string>:O</string>
+        <string>:=O</string>
+        <string>:-O</string>
+    </emoticon>
+</messaging-emoticon-map>

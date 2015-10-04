@@ -6,7 +6,7 @@ using System.Text;
 using LiveCodingChat;
 using System.Windows.Forms;
 
-namespace NeinTom
+namespace NeinTom.ChatLog
 {
     public class ChatMessage
     {

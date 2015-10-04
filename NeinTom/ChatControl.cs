@@ -4,6 +4,8 @@ using LiveCodingChat.Xmpp;
 using System.Collections.Generic;
 using LiveCodingChat;
 using System.Linq;
+using NeinTom.ChatLog;
+
 namespace NeinTom
 {
 	public partial class ChatControl

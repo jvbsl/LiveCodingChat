@@ -4,7 +4,7 @@ using System.Xml;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-namespace NeinTom
+namespace NeinTom.ChatLog
 {
     internal class TextPart : ChatMessagePart
     {
@@ -66,7 +66,7 @@ namespace NeinTom
         }
         private bool AddPatterns(string text)
         {
-            string smileyMatch = "(?<Smiley>(:D|:-D))";
+            string smileyMatch = SmileyPart.Match;
             string linkMatch = @"(?<Link>(((http|ftp|https|rtmp|rtps|apt):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)))";
             string pattern = "(.*?)(" + smileyMatch + "|" + linkMatch + "|(.*?))(.*?)";//
             int lastMatched = 0;

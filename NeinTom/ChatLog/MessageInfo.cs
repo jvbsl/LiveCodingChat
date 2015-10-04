@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NeinTom
+namespace NeinTom.ChatLog
 {
 	public class MessageInfo
 	{

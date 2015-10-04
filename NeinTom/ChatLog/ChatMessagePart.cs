@@ -4,7 +4,7 @@ using System.Xml;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace NeinTom
+namespace NeinTom.ChatLog
 {
     internal abstract class ChatMessagePart
     {

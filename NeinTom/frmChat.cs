@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using LiveCodingChat.Xmpp;
 using LiveCodingChat;
-
+using NeinTom.ChatLog;
 
 namespace NeinTom
 {

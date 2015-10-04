@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace NeinTom
+namespace NeinTom.ChatLog
 {
     internal class LinkPart : ChatMessagePart
     {

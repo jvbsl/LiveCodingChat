@@ -9,7 +9,7 @@ namespace NeinTom
             this.spltRoom = new System.Windows.Forms.SplitContainer();
             this.txtToSend = new System.Windows.Forms.TextBox();
             this.lstUsers = new System.Windows.Forms.ListBox();
-            this.chatLog = new NeinTom.ChatLogControl();
+            this.chatLog = new ChatLog.ChatLogControl();
             ((System.ComponentModel.ISupportInitialize)(this.spltUserList)).BeginInit();
             this.spltUserList.Panel1.SuspendLayout();
             this.spltUserList.Panel2.SuspendLayout();
@@ -107,7 +107,7 @@ namespace NeinTom
 		private System.Windows.Forms.SplitContainer spltRoom;
 		private System.Windows.Forms.TextBox txtToSend;
 		private System.Windows.Forms.ListBox lstUsers;
-        private ChatLogControl chatLog;
+        private ChatLog.ChatLogControl chatLog;
     }
 }
 

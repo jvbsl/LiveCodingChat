@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace NeinTom
+namespace NeinTom.ChatLog
 {
     
 	public class CircularBuffer<T>:IList<T>,IEnumerable<T>

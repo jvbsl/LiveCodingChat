@@ -14,7 +14,8 @@ namespace NeinTom
 		public frmMain ()
 		{
 			InitializeComponent ();
-			chatForms = new Dictionary<string,frmChat> ();
+            string m= ChatLog.SmileyPart.Match;
+            chatForms = new Dictionary<string,frmChat> ();
 			frmLogin frmLogin = new frmLogin ();
 			if (frmLogin.ShowDialog () != System.Windows.Forms.DialogResult.OK) {
 				this.Close ();
@@ -88,7 +89,7 @@ namespace NeinTom
                 return;
             }
             frm.Activate();
-            frm.AddMessage(e,room);
+            frm.AddMessage(e);
         }
 			
 	}

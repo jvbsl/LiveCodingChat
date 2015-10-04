@@ -4,17 +4,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using LiveCodingChat.Xmpp;
 
-namespace NeinTom
+namespace NeinTom.ChatLog
 {
-    public class ChatLogControl : UserControl
+    public partial class ChatLogControl : UserControl
     {
         CircularBuffer<ChatMessage> messages;
         private bool needsResize;
         Font userNameFont;
         private float logHeight, scrollOffset;
-        private Timer tmrUpdate;
-        private System.ComponentModel.IContainer components;
-
+        
+        private Size oldClientSize;
         public ChatLogControl()
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
@@ -26,6 +25,7 @@ namespace NeinTom
             messages.ItemThrown += Messages_ItemThrown;
             Font = new Font(new FontFamily("Arial"), 12.0f);
             userNameFont = new Font(Font, FontStyle.Bold);
+            oldClientSize = this.ClientSize;
             needsResize = true;
         }
 
@@ -51,7 +51,8 @@ namespace NeinTom
                 this.VerticalScroll.Value = max;
             this.VerticalScroll.Maximum = max;
             this.VerticalScroll.Visible = this.VerticalScroll.Maximum > 0;*/
-            this.AutoScrollMinSize = new Size(ClientSize.Width, (int)logHeight);
+            this.AutoScrollMinSize = new Size(0, (int)logHeight);
+
             needsResize = false;
         }
         private SizeF MeasureMessage(string message, Graphics g, float leftMargin)
@@ -66,21 +67,31 @@ namespace NeinTom
         {
             messages.Add(message);
             logHeight += message.Size.Height;
-            /*int max = Math.Max((int)logHeight - this.ClientSize.Height, 0);
-            if (this.VerticalScroll.Value > max)
-                this.VerticalScroll.Value = max;
-            this.VerticalScroll.Maximum = max;
-            this.VerticalScroll.Visible = this.VerticalScroll.Maximum > 0;*/
-            this.AutoScrollMinSize = new Size(ClientSize.Width, (int)logHeight);
+
             needsResize = true;
+            bool scroll = (((this.ClientSize.Height - (int)logHeight + this.Margin.Bottom)- this.AutoScrollPosition.Y) <= this.Margin.Bottom);
+            if (scroll)
+            {//729,767,3
+                MeasureTexts(CreateGraphics());//TODO: böse
+                ScrollToBottom();
+            }
+            else
+                this.AutoScrollMinSize = new Size(0, (int)logHeight);
+           
             this.Invalidate();
+        }
+        public void ScrollToBottom()
+        {
+            Size sz = this.ClientSize - this.AutoScrollMinSize + this.AutoScrollMargin;
+            this.AutoScrollPosition = new Point(this.AutoScrollPosition.X, -sz.Height) ;
+            //this.AutoScrollPosition = new Point(this.AutoScrollPosition.X, (this.ClientSize.Height - (int)logHeight+this.Margin.Bottom));
+            
         }
         private void ChatLog_Paint(object sender, PaintEventArgs e)
         {
             if (needsResize)
             {
                 MeasureTexts(e.Graphics);
-                this.AutoScrollMinSize = new Size(ClientSize.Width, (int)logHeight);
             }
             int scrollOffset = this.AutoScrollPosition.Y;//this.VerticalScroll.Value - this.VerticalScroll.Minimum;
             foreach (ChatMessage m in messages)
@@ -88,40 +99,23 @@ namespace NeinTom
                 m.Draw(e.Graphics, new PointF(m.Position.X, m.Position.Y + ((int)logHeight - this.ClientSize.Height) + scrollOffset), m.Size);
             }
         }
+
         private void ChatLog_Resize(object sender, EventArgs e)
         {
+            bool scroll = ((oldClientSize.Height - (int)logHeight) == this.AutoScrollPosition.Y);
             MeasureTexts(this.CreateGraphics());//pöse pöse creategraphics :D
+            if (scroll)
+                ScrollToBottom();
+            oldClientSize = this.ClientSize;
             this.Invalidate();
         }
-        private void InitializeComponent()
-        {
-            this.components = new System.ComponentModel.Container();
-            this.tmrUpdate = new System.Windows.Forms.Timer(this.components);
-            this.SuspendLayout();
-            // 
-            // tmrUpdate
-            // 
-            this.tmrUpdate.Enabled = true;
-            this.tmrUpdate.Interval = 40;
-            this.tmrUpdate.Tick += new System.EventHandler(this.tmrUpdate_Tick);
-            // 
-            // ChatLogControl
-            // 
-            this.AutoScroll = true;
-            this.Name = "ChatLogControl";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.ChatLog_Paint);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChatLogControl_MouseDown);
-            this.Resize += new System.EventHandler(this.ChatLog_Resize);
-            this.ResumeLayout(false);
 
-        }
 
         private void ChatLogControl_Scroll(object sender, ScrollEventArgs e)
         {
 
             if (e.ScrollOrientation == ScrollOrientation.VerticalScroll)
             {
-                //VerticalScroll.Value = e.NewValue;
                 this.Invalidate();
             }
 

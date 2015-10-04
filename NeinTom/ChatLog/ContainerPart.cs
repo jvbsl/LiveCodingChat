@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace NeinTom
+namespace NeinTom.ChatLog
 {
 	internal class ContainerPart:ChatMessagePart
 	{
