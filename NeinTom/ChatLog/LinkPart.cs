@@ -57,5 +57,22 @@ namespace NeinTom.ChatLog
                 Text = element.InnerText;
             }
         }
+
+        protected override void MouseMoveInternal(PointF location, MouseEventArgs e)
+        {
+            
+        }
+        protected override void MouseEnterInternal(PointF location, MouseEventArgs e)
+        {
+            base.MouseEnterInternal(location, e);
+            System.Windows.Forms.Cursor.Current = Cursors.PanEast;
+            Console.WriteLine("Enter");
+        }
+        protected override void MouseLeaveInternal(PointF location, MouseEventArgs e)
+        {
+            base.MouseLeaveInternal(location, e);
+            System.Windows.Forms.Cursor.Current = Cursors.Default;
+            Console.WriteLine("Leave");
+        }
     }
 }

@@ -58,6 +58,21 @@ namespace NeinTom.ChatLog
             if (location.X > offset)
                 root.MouseDown(new PointF(location.X - offset, location.Y), e);
         }
+        public void MouseMove(PointF location, MouseEventArgs e)
+        {
+            if (location.X > offset)
+                root.MouseMove(new PointF(location.X - offset, location.Y), e);
+        }
+        public void MouseEnter(PointF location, MouseEventArgs e)
+        {
+            if (location.X > offset)
+                root.MouseEnter(new PointF(location.X - offset, location.Y), e);
+        }
+        public void MouseLeave(PointF location, MouseEventArgs e)
+        {
+            if (location.X > offset)
+                root.MouseLeave(new PointF(location.X - offset, location.Y), e);
+        }
     }
 }
 

@@ -27,7 +27,9 @@ namespace NeinTom.ChatLog
             this.Name = "ChatLogControl";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ChatLog_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ChatLogControl_MouseDown);
-
+            this.MouseEnter += new System.EventHandler(this.ChatLogControl_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.ChatLogControl_MouseLeave);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ChatLogControl_MouseMove);
             this.Resize += new System.EventHandler(this.ChatLog_Resize);
             this.ResumeLayout(false);
 

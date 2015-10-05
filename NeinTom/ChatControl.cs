@@ -53,6 +53,43 @@ namespace NeinTom
 				Room.SendMessage (txtToSend.Text);
 				txtToSend.Text = "";
 			}
+            else if(e.Control)
+            {
+                if (e.KeyCode == Keys.Back)
+                {
+                    if (txtToSend.SelectionLength > 0)
+                        txtToSend.SelectedText = "";
+                    int i = -1;
+                    for (i = txtToSend.SelectionStart; i > 0; i--)
+                    {
+                        if (!char.IsLetterOrDigit(txtToSend.Text[i-1]))
+                            break;
+                    }
+                    if (i > -1)
+                    {
+                        txtToSend.Text = txtToSend.Text.Substring(0, Math.Max(i-1,0)) + txtToSend.Text.Substring(txtToSend.SelectionStart);
+                        txtToSend.SelectionStart = i;
+                    }
+                    e.SuppressKeyPress = true;
+                }
+                else if (e.KeyCode == Keys.Delete)
+                {
+                    if (txtToSend.SelectionLength > 0)
+                        txtToSend.SelectedText = "";
+                    int i = -1;
+                    for (i = txtToSend.SelectionStart-1; i < txtToSend.Text.Length-1; i++)
+                    {
+                        if (!char.IsLetterOrDigit(txtToSend.Text[i + 1]))
+                            break;
+                    }
+                    if (i<txtToSend.Text.Length)
+                    {
+                        txtToSend.Text = txtToSend.Text.Substring(0, txtToSend.SelectionStart) + txtToSend.Text.Substring(i, Math.Max(0,txtToSend.Text.Length - 1 - i));
+                        txtToSend.SelectionStart = i;
+                    }
+                    e.SuppressKeyPress = true;
+                }
+            }
 		}
 	}
 }

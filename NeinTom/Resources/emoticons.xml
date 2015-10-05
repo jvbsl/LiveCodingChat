@@ -111,6 +111,7 @@
     <emoticon file="giggle.gif">
         <string>(giggle)</string>
         <string>(chuckle)</string>
+        <string>^^</string>
     </emoticon>
     <emoticon file="handshake.gif">
         <string>(handshake)</string>
@@ -374,5 +375,6 @@
         <string>:O</string>
         <string>:=O</string>
         <string>:-O</string>
+        <string>oO</string>
     </emoticon>
 </messaging-emoticon-map>

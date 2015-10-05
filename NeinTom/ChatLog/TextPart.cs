@@ -155,6 +155,11 @@ namespace NeinTom.ChatLog
         {
 
         }
+
+        protected override void MouseMoveInternal(PointF location, MouseEventArgs e)
+        {
+
+        }
     }
 }
 

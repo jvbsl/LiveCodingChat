@@ -27,6 +27,7 @@ namespace NeinTom.ChatLog
             {
                 el = el.NextSibling;
             }
+            List<string> emoticonsMatcher = new List<string>();
             StringBuilder matchBuilder = new StringBuilder();
             foreach (XmlElement emojiElement in el.ChildNodes)
             {
@@ -35,17 +36,23 @@ namespace NeinTom.ChatLog
                     string emojiFile = emojiElement.Attributes["file"].Value;
                     foreach (XmlElement emojiSymbol in emojiElement.ChildNodes)
                     {
-                        if (emoticons.ContainsKey(emojiSymbol.InnerText))
+                        if (emoticons.ContainsKey(emojiSymbol.InnerText) || string.IsNullOrEmpty(emojiSymbol.InnerText))
                             continue;
-                        if (matchBuilder.Length != 0)
-                            matchBuilder.Append('|');
-                        matchBuilder.Append(Regex.Escape(emojiSymbol.InnerText));
-
                         emoticons.Add(emojiSymbol.InnerText, emojiFile);
+                        emoticonsMatcher.Add(emojiSymbol.InnerText);
                     }
                 }
             }
-            //LoadEmojies();
+
+            emoticonsMatcher = emoticonsMatcher.OrderBy(emoji => emoji.Length).ToList();
+
+            foreach (string emoji in emoticonsMatcher)
+            {
+                if (matchBuilder.Length != 0)
+                    matchBuilder.Append('|');
+                matchBuilder.Append(Regex.Escape(emoji));
+                //LoadEmojies();
+            }
             match = "(?<Smiley>(" + matchBuilder.ToString() + "))";
         }
         public static string Match
@@ -82,7 +89,7 @@ namespace NeinTom.ChatLog
                 Bitmap emoji=null;
                 if (!animations.TryGetValue(file,out emoji))
                 {
-                    object res = Properties.Resources.ResourceManager.GetObject(System.IO.Path.GetFileNameWithoutExtension(file));
+                    object res = Properties.Resources.ResourceManager.GetObject(System.IO.Path.GetFileNameWithoutExtension(file.Replace(' ','_')));
                     if (res is Bitmap)
                         emoji = (Bitmap)res;
                     if (emoji != null && ImageAnimator.CanAnimate(emoji))
@@ -104,6 +111,8 @@ namespace NeinTom.ChatLog
             : base(parent)
         {
             smiley = getEmoji(smileyType);
+            if (smiley == null)
+                smiley = getEmoji(smileyType);
         }
         private static void OnFrameChanged(object sender, EventArgs e)
         {
@@ -126,6 +135,11 @@ namespace NeinTom.ChatLog
         }
 
         protected override void PreParse(XmlElement element)
+        {
+
+        }
+
+        protected override void MouseMoveInternal(PointF location, MouseEventArgs e)
         {
 
         }

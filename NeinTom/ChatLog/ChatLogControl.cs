@@ -126,6 +126,45 @@ namespace NeinTom.ChatLog
             this.Invalidate();
         }
 
+        private void ChatLogControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            float currentPosition = ClientSize.Height + ((int)logHeight - this.ClientSize.Height) + AutoScrollPosition.Y;
+            foreach (ChatMessage msg in messages)
+            {
+                currentPosition -= msg.Size.Height;
+                if (e.Y > currentPosition && e.Y < currentPosition + msg.Size.Height)
+                    msg.MouseMove(new PointF(e.X, e.Y - currentPosition), e);
+
+            }
+        }
+
+        private void ChatLogControl_MouseEnter(object sender, EventArgs eb)
+        {
+            Point location = this.PointToClient(System.Windows.Forms.Cursor.Position);
+            MouseEventArgs e = new MouseEventArgs(MouseButtons.None, 0, location.X, location.Y, 0);
+            float currentPosition = ClientSize.Height + ((int)logHeight - this.ClientSize.Height) + AutoScrollPosition.Y;
+            foreach (ChatMessage msg in messages)
+            {
+                currentPosition -= msg.Size.Height;
+                if (e.Y > currentPosition && e.Y < currentPosition + msg.Size.Height)
+                    msg.MouseEnter(new PointF(e.X, e.Y - currentPosition), e);
+
+            }
+        }
+
+        private void ChatLogControl_MouseLeave(object sender, EventArgs eb)
+        {
+            Point location = this.PointToClient(System.Windows.Forms.Cursor.Position);
+            MouseEventArgs e = new MouseEventArgs(MouseButtons.None,0,location.X,location.Y,0);
+            float currentPosition = ClientSize.Height + ((int)logHeight - this.ClientSize.Height) + AutoScrollPosition.Y;
+            foreach (ChatMessage msg in messages)
+            {
+                currentPosition -= msg.Size.Height;
+                msg.MouseLeave(new PointF(e.X, e.Y - currentPosition), e);
+
+            }
+        }
+
         private void ChatLogControl_MouseDown(object sender, MouseEventArgs e)
         {
             float currentPosition = ClientSize.Height  +((int)logHeight - this.ClientSize.Height) + AutoScrollPosition.Y;

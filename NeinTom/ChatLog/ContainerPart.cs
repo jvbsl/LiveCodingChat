@@ -23,6 +23,11 @@ namespace NeinTom.ChatLog
             
         }
 
+        protected override void MouseMoveInternal(PointF location, MouseEventArgs e)
+        {
+
+        }
+
         protected override void ParseInternal (System.Drawing.Graphics g)
 		{
 			//TODO: throw new NotImplementedException ();

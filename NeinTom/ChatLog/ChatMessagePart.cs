@@ -137,40 +137,91 @@ namespace NeinTom.ChatLog
             }
 
         }
-        public void MouseDown(PointF location, MouseEventArgs e)
+        public virtual ChatMessagePart MouseLeave(PointF location, MouseEventArgs e)
+        {
+            if (parts == null)
+            {
+                MouseLeaveInternal(location, e);
+                return this;
+            }
+            else
+            {
+                return MouseForwarding(location, e, new ForwardingDelegate(delegate (ChatMessagePart part, PointF loc, MouseEventArgs ev) { part.MouseLeave(loc, ev); }));
+            }
+        }
+        public virtual ChatMessagePart MouseEnter(PointF location, MouseEventArgs e)
+        {
+            if (parts == null)
+            {
+                MouseEnterInternal(location, e);
+                return this;
+            }
+            else
+            {
+                return MouseForwarding(location, e, new ForwardingDelegate(delegate (ChatMessagePart part, PointF loc, MouseEventArgs ev) { part.MouseEnter(loc, ev); }));
+            }
+        }
+        public virtual ChatMessagePart MouseDown(PointF location, MouseEventArgs e)
         {
             if (parts == null)
             {
                 MouseDownInternal(location, e);
+                return this;
             }
             else
             {
-                float pX = 0, pY = 0;
-                float lineHeight = 0;
-                foreach (ChatMessagePart part in parts)
-                {
-                    if ((pX + part.Size.Width > Size.Width) && lineHeight != 0)
-                    {
-                        pX = 0;
-                        pY += lineHeight;
-                        lineHeight = 0;
-                    }
-                    lineHeight = Math.Max(lineHeight, part.Size.Height);
-                    if (new RectangleF(new PointF(pX, pY), part.Size).Contains(location))
-                    {
-                        part.MouseDown(new PointF(location.X - pX, location.Y - pY), e);
-                        break;
-                    }
-                    pX += part.Size.Width;
-                }
+                return MouseForwarding(location, e, new ForwardingDelegate(delegate (ChatMessagePart part, PointF loc, MouseEventArgs ev) { part.MouseDown(loc, ev); }));
             }
+        }
+        public virtual ChatMessagePart MouseMove(PointF location, MouseEventArgs e)
+        {
+            if (parts == null)
+            {
+                MouseMoveInternal(location, e);
+                return this;
+            }
+            else
+            {
+                return MouseForwarding(location, e, new ForwardingDelegate(
+                    delegate (ChatMessagePart part, PointF loc, MouseEventArgs ev) {
+                        part.MouseMove(loc, ev);
+                    }));
+            }
+        }
+        protected delegate void ForwardingDelegate(ChatMessagePart part, PointF location, MouseEventArgs e);
+
+        protected ChatMessagePart MouseForwarding(PointF location, MouseEventArgs e, ForwardingDelegate del)
+        {
+            float pX = 0, pY = 0;
+            float lineHeight = 0;
+            foreach (ChatMessagePart part in parts)
+            {
+                if ((pX + part.Size.Width > Size.Width) && lineHeight != 0)
+                {
+                    pX = 0;
+                    pY += lineHeight;
+                    lineHeight = 0;
+                }
+                lineHeight = Math.Max(lineHeight, part.Size.Height);
+                if (new RectangleF(new PointF(pX, pY), part.Size).Contains(location))
+                {
+                    del(part, new PointF(location.X - pX, location.Y - pY), e);
+
+                    return part;
+                }
+                pX += part.Size.Width;
+            }
+            return null;
         }
 
 
         protected abstract void PreParse(XmlElement element);
         protected abstract void ParseInternal(Graphics g);
         protected abstract void DrawInternal(Graphics g, PointF position, SizeF size);
-        protected abstract void MouseDownInternal(PointF location, MouseEventArgs e);
+        protected virtual void MouseDownInternal(PointF location, MouseEventArgs e) { }
+        protected virtual void MouseMoveInternal(PointF location, MouseEventArgs e) { }
+        protected virtual void MouseEnterInternal(PointF location, MouseEventArgs e) { }
+        protected virtual void MouseLeaveInternal(PointF location, MouseEventArgs e) { }
     }
 }
 
