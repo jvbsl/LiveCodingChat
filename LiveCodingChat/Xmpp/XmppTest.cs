@@ -190,7 +190,7 @@ namespace LiveCodingChat.Xmpp
                                 user.Role = role ?? user.Role;
                                 user.Premium = premium == null ? user.Premium : bool.Parse(premium);
                                 user.Staff = staff == null ? user.Staff : bool.Parse(staff);
-                                user.Color = color == null ? user.Color : System.Drawing.Color.FromArgb(Convert.ToInt32(color.Substring(1), 16));
+                                user.Color = color == null ? user.Color : System.Drawing.Color.FromArgb(Convert.ToInt32("ff" + color.Substring(1), 16));
                             }
                         }
                     }

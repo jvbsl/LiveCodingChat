@@ -14,6 +14,9 @@ namespace AdamBot
         private static bool run = false;
         private static System.Media.SoundPlayer player;
         private static int userCount = 0;
+        private static List<string> welcomeUser = new List<string>();
+        private static System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
+        private static int timeToSayHelloAgainInMinutes = 30;
         private static bool isStarted = false;
         private static Random rnd = new Random();
         public static void Main(string[] args)
@@ -88,14 +91,12 @@ namespace AdamBot
                         run = false;
                         break;
                     }
-                    else if (ln == "start bot")
+                    else if(ln == "start bot")
                     {
                         isStarted = true;
+                        stopWatch.Start();
                     }
-                    else
-                    {
-                        chatRoom.Room.SendMessage(ln);
-                    }
+                    chatRoom.Room.SendMessage(ln);
                 }
             }
             catch (Exception ex)
@@ -123,8 +124,17 @@ namespace AdamBot
                 System.Timers.Timer tmr = new System.Timers.Timer();
                 tmr.Interval = 20000;
                 tmr.Elapsed +=delegate {
-
-                    room.SendMessage("Willkommen @" + user.ID + ".Ich bin Adam der Bot dieses Streams. Sprich mich an, wenn du Infos zum Stream brauchst");
+                    if (welcomeUser.Count != 0)
+                        for (int i = 0; i < welcomeUser.Count; i++)
+                            if (Convert.ToInt32(welcomeUser[i].Remove(0, welcomeUser[i].Length - 3)) <= stopWatch.Elapsed.Minutes - timeToSayHelloAgainInMinutes)
+                                welcomeUser.Remove(welcomeUser[i]);
+                    
+                    if (!welcomeUser.Exists(t => t.Substring(0, t.Length - 3) == user.ID.ToLower()))
+                    {
+                        room.SendMessage("Willkommen @" + user.ID + ".Ich bin Adam der Bot dieses Streams. Sprich mich an, wenn du Infos zum Stream brauchst");
+                        welcomeUser.Add(user.ID.ToLower() + stopWatch.Elapsed.Minutes.ToString("000"));
+                    }
+                    
                     if (userCount % 10 == 0)
                     {
                         room.SendMessage("@" + user.ID + " ist der " + userCount + " besucher dieses Streams :hi:");
@@ -171,6 +181,19 @@ namespace AdamBot
                     string pollRes = poll.CreatePoll();
                     if (pollRes != null)
                         room.SendMessage("Neuer Poll - " + args[0] + ": " + pollRes);
+                }
+            }
+            if (fnd.Contains("kopfoderzahl?"))
+            {
+                byte b = Convert.ToByte(rnd.Next(0, 2));
+                switch (b)
+                {
+                    case 0:
+                        room.SendMessage("@" + e.Nick + " Kopf");
+                        break;
+                    case 1:
+                        room.SendMessage("@" + e.Nick + " Zahl");
+                        break;
                 }
             }
         }

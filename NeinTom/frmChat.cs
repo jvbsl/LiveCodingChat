@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using LiveCodingChat.Xmpp;
 using LiveCodingChat;
-
+using NeinTom.ChatLog;
 
 namespace NeinTom
 {
@@ -12,7 +12,25 @@ namespace NeinTom
 		public frmChat ()
 		{
 			InitializeComponent ();
+
+			//TestControl ();//TODO: remove
 		}
+
+		public void TestControl()
+		{
+			TabPage page = new TabPage ();
+			page.Text = "TestPage";
+			ChatLogControl log = new ChatLogControl ();
+			log.Dock = DockStyle.Fill;
+			page.Controls.Add (log);
+			User user = new User ("testid");
+			user.Color = Color.Red;
+			log.AddMessage (new ChatMessage (log,user, "zumindest <b>zeit<i>lich</i></b> gesehen"));
+			log.AddMessage (new ChatMessage (log,user, "haha <b>test<i>5873</i></b> bla"));
+            log.AddMessage(new ChatMessage(log, user, "unformatierter test text bla susch sieht das hier niemals"));
+            AddTabPage (page);
+		}
+
 		public TabPage CreateTabPage(Room room)
 		{
 			TabPage page = new TabPage ();
@@ -52,11 +70,18 @@ namespace NeinTom
 				return;
 			this.Text = "Chat - " + tabControl.SelectedTab.Text;
 		}
+        public void UserStateChanged(User user,UserState state)
+        {
+            int tab = 0;
+            ChatControl cht = (ChatControl)tabControl.TabPages[tab].Controls[0];
+            cht.UserStateChanged(user,state);
+        }
 		public void AddMessage(LiveCodingChat.Xmpp.MessageReceivedEventArgs e)
 		{
 			int tab = 0;
 			ChatControl cht = (ChatControl)tabControl.TabPages [tab].Controls [0];
 			cht.AddMessage (e);
+           
 		}
 	}
 }

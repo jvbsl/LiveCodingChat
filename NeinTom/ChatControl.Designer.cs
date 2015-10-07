@@ -7,9 +7,9 @@ namespace NeinTom
 		{
             this.spltUserList = new System.Windows.Forms.SplitContainer();
             this.spltRoom = new System.Windows.Forms.SplitContainer();
-            this.txtChatLog = new System.Windows.Forms.TextBox();
             this.txtToSend = new System.Windows.Forms.TextBox();
             this.lstUsers = new System.Windows.Forms.ListBox();
+            this.chatLog = new ChatLog.ChatLogControl();
             ((System.ComponentModel.ISupportInitialize)(this.spltUserList)).BeginInit();
             this.spltUserList.Panel1.SuspendLayout();
             this.spltUserList.Panel2.SuspendLayout();
@@ -46,7 +46,7 @@ namespace NeinTom
             // 
             // spltRoom.Panel1
             // 
-            this.spltRoom.Panel1.Controls.Add(this.txtChatLog);
+            this.spltRoom.Panel1.Controls.Add(this.chatLog);
             // 
             // spltRoom.Panel2
             // 
@@ -54,15 +54,6 @@ namespace NeinTom
             this.spltRoom.Size = new System.Drawing.Size(93, 150);
             this.spltRoom.SplitterDistance = 115;
             this.spltRoom.TabIndex = 0;
-            // 
-            // txtChatLog
-            // 
-            this.txtChatLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtChatLog.Location = new System.Drawing.Point(0, 0);
-            this.txtChatLog.Multiline = true;
-            this.txtChatLog.Name = "txtChatLog";
-            this.txtChatLog.Size = new System.Drawing.Size(93, 115);
-            this.txtChatLog.TabIndex = 0;
             // 
             // txtToSend
             // 
@@ -82,6 +73,17 @@ namespace NeinTom
             this.lstUsers.Size = new System.Drawing.Size(53, 150);
             this.lstUsers.TabIndex = 0;
             // 
+            // chatLog
+            // 
+            this.chatLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chatLog.Font = new System.Drawing.Font("Arial", 12F);
+            this.chatLog.Location = new System.Drawing.Point(0, 0);
+            this.chatLog.Name = "chatLog";
+            this.chatLog.ShowTimeStamp = false;
+            this.chatLog.Size = new System.Drawing.Size(93, 115);
+            this.chatLog.TabIndex = 0;
+            this.chatLog.TimeStampFormat = null;
+            // 
             // ChatControl
             // 
             this.Controls.Add(this.spltUserList);
@@ -91,7 +93,6 @@ namespace NeinTom
             ((System.ComponentModel.ISupportInitialize)(this.spltUserList)).EndInit();
             this.spltUserList.ResumeLayout(false);
             this.spltRoom.Panel1.ResumeLayout(false);
-            this.spltRoom.Panel1.PerformLayout();
             this.spltRoom.Panel2.ResumeLayout(false);
             this.spltRoom.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.spltRoom)).EndInit();
@@ -104,9 +105,9 @@ namespace NeinTom
 
 		private System.Windows.Forms.SplitContainer spltUserList;
 		private System.Windows.Forms.SplitContainer spltRoom;
-		private System.Windows.Forms.TextBox txtChatLog;
 		private System.Windows.Forms.TextBox txtToSend;
 		private System.Windows.Forms.ListBox lstUsers;
-	}
+        private ChatLog.ChatLogControl chatLog;
+    }
 }
 

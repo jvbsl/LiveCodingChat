@@ -39,36 +39,44 @@
     <Compile Include="ChatControl.Designer.cs">
       <DependentUpon>ChatControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChatLog\ChatLogControl.Designer.cs">
+      <DependentUpon>ChatLogControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChatLog\LinkPart.cs" />
+    <Compile Include="ChatLog\RootPart.cs" />
+    <Compile Include="ChatLog\SmileyPart.cs" />
     <Compile Include="frmChat.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmChat.Designer.cs">
-      <DependentUpon>frmChat.cs</DependentUpon>
-    </Compile>
+    <Compile Include="frmChat.Designer.cs" />
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmLogin.Designer.cs">
-      <DependentUpon>frmLogin.cs</DependentUpon>
-    </Compile>
+    <Compile Include="frmLogin.Designer.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
-    </Compile>
+    <Compile Include="frmMain.Designer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="CustomTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ChatLog.cs">
+    <Compile Include="ChatLog\ChatLogControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ChatMessage.cs" />
+    <Compile Include="ChatLog\CircularBuffer.cs" />
+    <Compile Include="ChatLog\ChatMessage.cs" />
+    <Compile Include="ChatLog\ChatMessagePart.cs" />
+    <Compile Include="ChatLog\TextPart.cs" />
+    <Compile Include="ChatLog\ContainerPart.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
     <Reference Include="System.Windows.Forms" />
@@ -84,8 +92,275 @@
     <EmbeddedResource Include="ChatControl.resx">
       <DependentUpon>ChatControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmLogin.resx">
-      <DependentUpon>frmLogin.cs</DependentUpon>
+    <EmbeddedResource Include="ChatLog\ChatLogControl.resx">
+      <DependentUpon>ChatLogControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\angel.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\angry.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bearhug.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beer.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blush.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bow.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boxing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brokenheart.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cake.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\callme.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cash.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cellphone.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clapping.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coffee.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cool.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crying.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dance.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\devil.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\doh.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drink.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dull.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\emo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\evilgrin.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flex.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flower.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\giggle.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\handshake.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\happy.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\heart.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hi.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddenbandit.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddenbug.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddendrunk.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddenfinger.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddenfubar.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddenheadbang.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddenmooning.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddenpoolparty.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddenrockout.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddensmoking.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddensquirrell.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddenswear.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddentmi.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiddentoivo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inlove.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\itwasntme.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jealous.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kiss.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laughing.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\makeup.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mmm.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\movie.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\music.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nerd.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ninja.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\no.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nod.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nospeak.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\party.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pizza.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\puke.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rain.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rofl.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sad.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shakeno.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\skype.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sleepy.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smile.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smirk.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\speechless.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sun.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\surprised.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sweating.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\talking.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thinking.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\time.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tired.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tongue out.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wait.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\whew.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wink.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wondering.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\worried.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yes.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\emoticons.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
 </Project>
