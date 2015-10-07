@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using LiveCodingChat.Xmpp;
 using LiveCodingChat.Livecoding;
 using LiveCodingChat;
+using AdamBot.Commands;
 
 namespace AdamBot
 {
@@ -87,11 +88,14 @@ namespace AdamBot
                         run = false;
                         break;
                     }
-                    else if(ln == "start bot")
+                    else if (ln == "start bot")
                     {
                         isStarted = true;
                     }
-                    chatRoom.Room.SendMessage(ln);
+                    else
+                    {
+                        chatRoom.Room.SendMessage(ln);
+                    }
                 }
             }
             catch (Exception ex)
@@ -157,6 +161,17 @@ namespace AdamBot
             if (fnd.Contains(chatRoom.Client.Nick) || fnd.Contains("adam"))
             {
                 room.SendMessage("@" + e.Nick + ": Hier wird OctoAwesome entwickelt. Mehr Infos unter http://www.octoawesome.net");
+            }
+            if (e.Nick == "jvbsl" || e.User.Staff || e.User.Role == "moderator")
+            {
+                if (fnd.StartsWith("/strawpoll "))
+                {
+                    string[] args = e.Message.Substring("/strawpoll ".Length).Split(',');
+                    Strawpoll poll = new Strawpoll(args);
+                    string pollRes = poll.CreatePoll();
+                    if (pollRes != null)
+                        room.SendMessage("Neuer Poll - " + args[0] + ": " + pollRes);
+                }
             }
         }
 
