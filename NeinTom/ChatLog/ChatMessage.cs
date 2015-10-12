@@ -20,10 +20,14 @@ namespace NeinTom.ChatLog
             XmlDocument doc = new XmlDocument();
             doc.LoadXml("<body>" + xml + "</body>");
             XmlElement root = (XmlElement)doc.FirstChild;
-            this.root = new RootPart((XmlElement)root, new Font("Arial", 16));
+			this.root = new RootPart(this,(XmlElement)root, new Font("Arial", 16));
             if (user != null)
                 Nick = user.ID;
         }
+		public Control getParentControl()
+		{
+			return parent;
+		}
         public string MessageText { get; private set; }
         public string TimeStamp { get; set; }
         public string Nick { get; set; }
@@ -60,8 +64,10 @@ namespace NeinTom.ChatLog
         }
         public void MouseMove(PointF location, MouseEventArgs e)
         {
-            if (location.X > offset)
-                root.MouseMove(new PointF(location.X - offset, location.Y), e);
+			if (location.X > offset)
+				root.MouseMove (new PointF (location.X - offset, location.Y), e);
+			else
+				root.MouseLeave (new PointF (location.X - offset, location.Y), e);
         }
         public void MouseEnter(PointF location, MouseEventArgs e)
         {
@@ -70,7 +76,7 @@ namespace NeinTom.ChatLog
         }
         public void MouseLeave(PointF location, MouseEventArgs e)
         {
-            if (location.X > offset)
+            //if (location.X > offset)
                 root.MouseLeave(new PointF(location.X - offset, location.Y), e);
         }
     }

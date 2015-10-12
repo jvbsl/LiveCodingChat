@@ -89,14 +89,17 @@ namespace NeinTom.ChatLog
                 Bitmap emoji=null;
                 if (!animations.TryGetValue(file,out emoji))
                 {
-                    object res = Properties.Resources.ResourceManager.GetObject(System.IO.Path.GetFileNameWithoutExtension(file.Replace(' ','_')));
-                    if (res is Bitmap)
-                        emoji = (Bitmap)res;
-                    if (emoji != null && ImageAnimator.CanAnimate(emoji))
-                    {
-                        ImageAnimator.Animate(emoji, new EventHandler(OnFrameChanged));
-                    }
-                    animations.Add(file, emoji);
+					try{
+	                    object res = Properties.Resources.ResourceManager.GetObject(System.IO.Path.GetFileNameWithoutExtension(file.Replace(' ','_')));
+	                    if (res is Bitmap)
+	                        emoji = (Bitmap)res;
+	                    if (emoji != null && ImageAnimator.CanAnimate(emoji))
+	                    {
+	                        ImageAnimator.Animate(emoji, new EventHandler(OnFrameChanged));
+	                    }
+	                    animations.Add(file, emoji);
+					}catch{
+					}
                 }
                 return emoji;
             }
@@ -121,7 +124,8 @@ namespace NeinTom.ChatLog
         protected override void DrawInternal(Graphics g, PointF position, SizeF size)
         {
             Animate();
-            g.DrawImage(smiley, new RectangleF(position, Size));
+			if (smiley != null)
+            	g.DrawImage(smiley, new RectangleF(position, Size));
         }
 
         protected override void MouseDownInternal(PointF location, MouseEventArgs e)
@@ -131,7 +135,8 @@ namespace NeinTom.ChatLog
 
         protected override void ParseInternal(Graphics g)
         {
-            Size = smiley.Size;//new SizeF(24,24);
+			if (smiley != null)
+            	Size = smiley.Size;//new SizeF(24,24);
         }
 
         protected override void PreParse(XmlElement element)

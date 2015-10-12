@@ -42,6 +42,10 @@ namespace NeinTom.ChatLog
         {
             ParseXml(xml);
         }
+		public virtual Control getParentControl()
+		{
+			return parent.getParentControl ();
+		}
         public Font Font { get; protected set; }
         private void ParseXml(XmlElement element)
         {

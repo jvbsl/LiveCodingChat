@@ -11,18 +11,27 @@ namespace NeinTom.ChatLog
 {
     internal class RootPart:ContainerPart
     {
-        public RootPart(XmlElement xml,Font font = null)
+		
+		private ChatMessage parentChatMessage;
+        public RootPart(ChatMessage parentChatMessage,XmlElement xml,Font font = null)
 			: base (xml, null,font)
         {
-
+			this.parentChatMessage = parentChatMessage;
         }
         private ChatMessagePart previousHover;
+		public override Control getParentControl()
+		{
+			return parentChatMessage.getParentControl();
+		}
         public override ChatMessagePart MouseEnter(PointF location, MouseEventArgs e)
         {
             return previousHover = null;
         }
         public override ChatMessagePart MouseLeave(PointF location, MouseEventArgs e)
         {
+			if (previousHover != null) {
+				previousHover.MouseLeave (location, e);
+			}
             return previousHover = null;
         }
         public override ChatMessagePart MouseMove(PointF location, MouseEventArgs e)
@@ -41,12 +50,10 @@ namespace NeinTom.ChatLog
                         {
                             if (previousHover != null)
                             {
-                                Console.WriteLine("Leave: " + previousHover.Text);
                                 previousHover.MouseLeave(loc, ev);
                             }
                             if (tmp != null)
                             {
-                                Console.WriteLine("Enter: " + tmp.Text);
                                 tmp.MouseEnter(loc, ev);
                             }
 

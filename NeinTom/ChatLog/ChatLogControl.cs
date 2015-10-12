@@ -14,6 +14,7 @@ namespace NeinTom.ChatLog
         private float logHeight, scrollOffset;
         
         private Size oldClientSize;
+		private ChatMessage previousChatMessage;
         public ChatLogControl()
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
@@ -132,8 +133,19 @@ namespace NeinTom.ChatLog
             foreach (ChatMessage msg in messages)
             {
                 currentPosition -= msg.Size.Height;
-                if (e.Y > currentPosition && e.Y < currentPosition + msg.Size.Height)
+				if (e.Y > currentPosition && e.Y < currentPosition + msg.Size.Height)
+				{
+					if (msg != previousChatMessage) {
+						if (previousChatMessage != null)
+							previousChatMessage.MouseLeave (new PointF (e.X, e.Y - currentPosition), e);
+						msg.MouseEnter (new PointF (e.X, e.Y - currentPosition),e);
+						previousChatMessage = msg;
+					}
+					
+
                     msg.MouseMove(new PointF(e.X, e.Y - currentPosition), e);
+					break;
+				}
 
             }
         }

@@ -30,7 +30,7 @@ namespace NeinTom
 
 		void Session_SessionAutenticated (object sender, EventArgs e)
 		{
-			session.BeginOpenChat("bobstriker",EndOpenChat,null);
+			session.BeginOpenChat("jvbsl",EndOpenChat,null);
 		}
 
 		private void EndOpenChat(IAsyncResult res)

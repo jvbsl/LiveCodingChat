@@ -65,14 +65,12 @@ namespace NeinTom.ChatLog
         protected override void MouseEnterInternal(PointF location, MouseEventArgs e)
         {
             base.MouseEnterInternal(location, e);
-            System.Windows.Forms.Cursor.Current = Cursors.PanEast;
-            Console.WriteLine("Enter");
+			getParentControl().Cursor = Cursors.Hand;
         }
         protected override void MouseLeaveInternal(PointF location, MouseEventArgs e)
         {
             base.MouseLeaveInternal(location, e);
-            System.Windows.Forms.Cursor.Current = Cursors.Default;
-            Console.WriteLine("Leave");
+			getParentControl().Cursor = Cursors.Default;
         }
     }
 }
