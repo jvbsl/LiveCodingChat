@@ -333,7 +333,7 @@ namespace LiveCodingChat.Xmpp
 		private void Socket_MessageReceived (object sender,WebSocket4Net.MessageReceivedEventArgs e)
 		{
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine (e.Message);//TODO:
+			//Console.WriteLine (e.Message);//TODO:
 			Console.ForegroundColor = ConsoleColor.White;
 			XmlDocument doc= new XmlDocument();
 			doc.LoadXml (e.Message);

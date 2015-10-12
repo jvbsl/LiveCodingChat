@@ -4,7 +4,7 @@ using System.Drawing;
 using LiveCodingChat.Xmpp;
 using LiveCodingChat;
 using NeinTom.ChatLog;
-
+using System.Collections.Generic;
 namespace NeinTom
 {
 	public partial class frmChat
@@ -13,9 +13,10 @@ namespace NeinTom
 		{
 			InitializeComponent ();
 
+			pages = new Dictionary<string, TabPage> ();
 			//TestControl ();//TODO: remove
 		}
-
+		private Dictionary<string,TabPage> pages;
 		public void TestControl()
 		{
 			TabPage page = new TabPage ();
@@ -33,7 +34,11 @@ namespace NeinTom
 
 		public TabPage CreateTabPage(Room room)
 		{
-			TabPage page = new TabPage ();
+			if (pages.ContainsKey (room.ID)) {
+				return pages [room.ID];
+			}
+			pages.Add (room.ID, new TabPage ());
+			TabPage page = pages[room.ID];
 			page.Text = "Group: " + room.ID;
 			ChatControl cht = new ChatControl ();
 			cht.Dock = DockStyle.Fill;
@@ -50,10 +55,12 @@ namespace NeinTom
 		public void AddTabPage(TabPage tabPage)
 		{
 			tabControl.TabPages.Add (tabPage);
+			tabControl.SelectedTab = tabPage;
 			if (tabControl.TabCount > 1) {
-				tabControl.Appearance = TabAppearance.Normal;
-				tabControl.ItemSize = new Size(0, 1);
+
+				tabControl.ItemSize = new Size(125, 20);
 				tabControl.SizeMode = TabSizeMode.Normal;
+				tabControl.Appearance = TabAppearance.Normal;
 			}
 
 		}
@@ -70,16 +77,16 @@ namespace NeinTom
 				return;
 			this.Text = "Chat - " + tabControl.SelectedTab.Text;
 		}
-        public void UserStateChanged(User user,UserState state)
+		public void UserStateChanged(string roomID,User user,UserState state)
         {
-            int tab = 0;
-            ChatControl cht = (ChatControl)tabControl.TabPages[tab].Controls[0];
+			TabPage page = pages [roomID];
+			ChatControl cht = (ChatControl)page.Controls [0];
             cht.UserStateChanged(user,state);
         }
-		public void AddMessage(LiveCodingChat.Xmpp.MessageReceivedEventArgs e)
+		public void AddMessage(string roomID,LiveCodingChat.Xmpp.MessageReceivedEventArgs e)
 		{
-			int tab = 0;
-			ChatControl cht = (ChatControl)tabControl.TabPages [tab].Controls [0];
+			TabPage page = pages [roomID];
+			ChatControl cht = (ChatControl)page.Controls [0];
 			cht.AddMessage (e);
            
 		}

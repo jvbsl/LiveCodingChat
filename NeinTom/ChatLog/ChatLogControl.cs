@@ -71,7 +71,7 @@ namespace NeinTom.ChatLog
 
             needsResize = true;
             bool scroll = (((this.ClientSize.Height - (int)logHeight + this.Margin.Bottom)- this.AutoScrollPosition.Y) <= this.Margin.Bottom);
-            if (scroll)
+			if (scroll)
             {//729,767,3
                 MeasureTexts(CreateGraphics());//TODO: böse
                 ScrollToBottom();
