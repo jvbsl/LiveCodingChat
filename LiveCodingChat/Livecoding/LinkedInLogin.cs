@@ -70,7 +70,7 @@ namespace LiveCodingChat
 			}
 
 			if (LoginCompleted != null)
-				LoginCompleted (this, cookies);
+				LoginCompleted (this, new LoginEventArgs(data,cookies));
 		}
 		#endregion
 	}

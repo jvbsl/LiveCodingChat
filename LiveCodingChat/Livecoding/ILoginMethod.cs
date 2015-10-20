@@ -3,7 +3,7 @@ using System.Net;
 
 namespace LiveCodingChat
 {
-	public delegate void LoginCompleted(object sender,CookieContainer cookies);
+	public delegate void LoginCompleted(object sender,LoginEventArgs e);
 	public interface ILoginMethod
 	{
 		event LoginCompleted LoginCompleted;
