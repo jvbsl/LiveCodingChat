@@ -51,7 +51,7 @@ namespace LiveCodingChat.Livecoding
 		}
 		private void LoadFollowInfos(bool following)
 		{
-			HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create (PAGE + "rss/" + this.LiveCodingID + "/" + (following?"followed":"follower") + "/?key="+getRSSKey());
+			HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create (PAGE + "rss/" + this.LiveCodingID.ToLower() + "/" + (following?"followed":"follower") + "/?key="+getRSSKey());
 			request.BeginGetResponse (new AsyncCallback (EndLoadFollowInfos), new object[]{ request, following });
 		}
 		private void EndLoadFollowInfos(IAsyncResult res)
@@ -106,7 +106,7 @@ namespace LiveCodingChat.Livecoding
 		public string getRSSKey()
 		{
 			if (rssKey == null) {
-				HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create (PAGE + this.LiveCodingID + "/settings/followers/");
+				HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create (PAGE + this.LiveCodingID.ToLower() + "/settings/followers/");
 				request.CookieContainer = cookies;
 				using (StreamReader r = new StreamReader (request.GetResponse ().GetResponseStream ())) {
 					string data = HtmlHelper.getAttribute(HtmlHelper.getElement(r.ReadToEnd (),"<a class=\"feed-link\""),"href");
