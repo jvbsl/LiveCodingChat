@@ -13,10 +13,15 @@ namespace NeinTom.ChatLog
         private User user;
         private ChatMessagePart root;
         private ChatLogControl parent;
+		private StringFormat stf;
         public ChatMessage(ChatLogControl parent, User user, string xml)
         {
             this.parent = parent;
             this.user = user;
+			stf = StringFormat.GenericTypographic;
+			stf.FormatFlags |= StringFormatFlags.NoClip | StringFormatFlags.NoWrap;
+			stf.FormatFlags |= StringFormatFlags.LineLimit;
+			stf.LineAlignment = StringAlignment.Center;
             XmlDocument doc = new XmlDocument();
             doc.LoadXml("<body>" + xml + "</body>");
             XmlElement root = (XmlElement)doc.FirstChild;
@@ -42,7 +47,7 @@ namespace NeinTom.ChatLog
         private float offset = 0.0f;
         public void Parse(Graphics g, SizeF Size)
         {
-            SizeF size = g.MeasureString(TimeStamp + Nick + ":", parent.Font);
+			SizeF size = g.MeasureString(TimeStamp + Nick + ":", parent.Font,Size,stf);
             offset = size.Width;
             root.Parse(g, new SizeF(Size.Width - offset, Size.Height));
 
@@ -52,9 +57,9 @@ namespace NeinTom.ChatLog
         public void Draw(Graphics g, PointF position, SizeF size)
         {
             if (user == null)
-                g.DrawString(TimeStamp + Nick + ":", parent.Font, new SolidBrush(Color.Black), position);
+				g.DrawString(TimeStamp + Nick + ":", parent.Font, new SolidBrush(Color.Black), new RectangleF(position,new SizeF(offset,Size.Height)),stf);
             else
-                g.DrawString(TimeStamp + Nick + ":", parent.Font, new SolidBrush(user.Color), position);
+				g.DrawString(TimeStamp + Nick + ":", parent.Font, new SolidBrush(user.Color), new RectangleF(position,new SizeF(offset,Size.Height)),stf);
             root.Draw(g, new PointF(position.X + offset, position.Y), size);
         }
         public void MouseDown(PointF location, MouseEventArgs e)

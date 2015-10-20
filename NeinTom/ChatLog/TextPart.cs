@@ -14,8 +14,8 @@ namespace NeinTom.ChatLog
             : base(parent, font)
         {
             stf = StringFormat.GenericTypographic;
-            //stf.FormatFlags |= StringFormatFlags.MeasureTrailingSpaces;
-            formatFlags = TextFormatFlags.Default | TextFormatFlags.TextBoxControl | TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix;
+            stf.FormatFlags |= StringFormatFlags.NoClip;
+			formatFlags = TextFormatFlags.Default | TextFormatFlags.TextBoxControl | TextFormatFlags.NoPadding | TextFormatFlags.NoPrefix | TextFormatFlags.NoClipping;
             Text = XML = element.InnerText;
             PreParse(element);
             InitText();
@@ -27,16 +27,20 @@ namespace NeinTom.ChatLog
             Text = XML = text;
             InitText();
         }
+
         private void InitText()
         {
-            string[] splt = Text.Trim().Split(new char[] { ' ', '\n' });
+			string[] splt = Text.Trim().Split(new char[] { ' ', '\n' },true);
             parts = new List<ChatMessagePart>();
             
             bool found = false;
+			int currentPosition = 0;
             foreach (string txt in splt)
             {
-                if (string.IsNullOrEmpty(txt))
-                    continue;
+				if (string.IsNullOrEmpty (txt)) {
+					continue;
+				}
+				currentPosition += txt.Length;
                 if(AddPatterns(txt))
                 {
                     found = true;
@@ -122,10 +126,26 @@ namespace NeinTom.ChatLog
                 }
             }*/
         }
+		private SizeF MeasureString(Graphics g,string text,Font font)
+		{
+			StringFormat formatFlags = StringFormat.GenericTypographic;
+			formatFlags.FormatFlags |= StringFormatFlags.MeasureTrailingSpaces;
+			//formatFlags.GetMeasurableCharacterRangeCount ();
+			formatFlags.SetMeasurableCharacterRanges(new CharacterRange[]{new CharacterRange(0,text.Length)});
+
+			Region[] regions = g.MeasureCharacterRanges (text, font, new RectangleF (0,0,float.MaxValue,float.MaxValue), formatFlags);
+			float width=0, height=0;
+			foreach (Region r in regions) {
+				width = Math.Max (r.GetBounds(g).Right, width);
+				height = Math.Max (r.GetBounds (g).Bottom, height);
+			}
+			return new SizeF (width, height);
+		}
         protected override void ParseInternal(Graphics g)
         {
             Size = g.MeasureString(Text, Font, SizeF.Empty, stf);
             Size = TextRenderer.MeasureText(g, Text, Font, new Size(), formatFlags);
+			Size = MeasureString (g, Text, Font);
         }
         override protected void PreParse(XmlElement element)
         {
@@ -147,7 +167,7 @@ namespace NeinTom.ChatLog
         }
         override protected void DrawInternal(Graphics g, PointF position, SizeF size)
         {
-            TextRenderer.DrawText(g, Text, Font, new Rectangle((int)position.X, (int)position.Y, (int)size.Width, (int)size.Height), Color.Black, formatFlags);
+            TextRenderer.DrawText(g, Text, Font, new Rectangle((int)position.X, (int)position.Y, (int)size.Width+1, (int)size.Height+1), Color.Black, formatFlags);
             //g.DrawString(Text, Font, Brushes.Black, new RectangleF(position, size), stf);
         }
 

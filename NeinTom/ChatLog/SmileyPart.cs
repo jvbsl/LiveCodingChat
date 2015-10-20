@@ -62,6 +62,19 @@ namespace NeinTom.ChatLog
                 return match;
             }
         }
+		private static object getResosource(string name)
+		{
+			try{
+				object obj = Properties.Resources.ResourceManager.GetObject(name);
+				if (obj != null)
+					return obj;
+			}
+			catch(Exception e)
+			{
+				
+			}
+			return null;
+		}
         private static void LoadEmojies()
         {
             foreach (KeyValuePair<string,string> e in emoticons)
@@ -70,7 +83,7 @@ namespace NeinTom.ChatLog
                 Bitmap emoji;
                 if (!animations.TryGetValue(file, out emoji))
                 {
-                    object res = Properties.Resources.ResourceManager.GetObject(System.IO.Path.GetFileNameWithoutExtension(file));
+					object res = getResosource(System.IO.Path.GetFileNameWithoutExtension(file.Replace(' ','_')));
                     if (res is Bitmap)
                         emoji = (Bitmap)res;
                     if (emoji != null && ImageAnimator.CanAnimate(emoji))
@@ -90,7 +103,7 @@ namespace NeinTom.ChatLog
                 if (!animations.TryGetValue(file,out emoji))
                 {
 					try{
-	                    object res = Properties.Resources.ResourceManager.GetObject(System.IO.Path.GetFileNameWithoutExtension(file.Replace(' ','_')));
+						object res = getResosource(System.IO.Path.GetFileNameWithoutExtension(file.Replace(' ','_')));
 	                    if (res is Bitmap)
 	                        emoji = (Bitmap)res;
 	                    if (emoji != null && ImageAnimator.CanAnimate(emoji))

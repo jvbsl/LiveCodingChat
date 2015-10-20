@@ -69,6 +69,8 @@
     <Compile Include="ChatLog\ChatMessagePart.cs" />
     <Compile Include="ChatLog\TextPart.cs" />
     <Compile Include="ChatLog\ContainerPart.cs" />
+    <Compile Include="frmTest.cs" />
+    <Compile Include="ChatLog\StringExtension.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -188,5 +190,8 @@
     <EmbeddedResource Include="Resources\emoticons.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 </Project>
