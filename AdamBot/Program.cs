@@ -27,15 +27,13 @@ namespace AdamBot
                 player = new System.Media.SoundPlayer(System.IO.Path.Combine(dir, "sound.wav"));
                 player.Load();
             }
-            catch (Exception ex) { player = null; }
+            catch (Exception) { player = null; }
             run = true;
-            string username;
-            Console.Write("Username:");
-            username = Console.ReadLine();
 
+            ILoginMethod loginMethod = ReadLoginMethod();
+            string username = ReadUsername();
 
-
-            session = new LiveCodingChat.Livecoding.LivecodingSession(ReadLoginMethod(), username);
+            session = new LiveCodingChat.Livecoding.LivecodingSession(loginMethod, username);
             session.PasswordRequested += Session_PasswordRequested;
             session.SessionAutenticated += Session_SessionAutenticated;
             session.EnsureAuthenticated();
@@ -44,6 +42,13 @@ namespace AdamBot
                 System.Threading.Thread.Sleep(10);
             }
         }
+
+        private static string ReadUsername()
+        {
+            Console.Write("Username:");
+            return Console.ReadLine();
+        }
+
         static ILoginMethod ReadLoginMethod()
         {
             List<Type> types = new List<Type>();
@@ -61,7 +66,7 @@ namespace AdamBot
             int parsed = 0;
             do
             {
-                Console.Write("Use Login Method:");
+                Console.Write("Select Login Method:");
             } while (!int.TryParse(Console.ReadLine(), out parsed) || parsed >= types.Count || parsed < 0);
             return (ILoginMethod)types[parsed].GetConstructor(new Type[] { }).Invoke(new object[] { });
         }
@@ -74,7 +79,7 @@ namespace AdamBot
             session.BeginOpenChat(room, new AsyncCallback(EndOpenChat), null);
 
         }
-        static ChatRoom chatRoom=null;
+        static ChatRoom chatRoom = null;
         private static void EndOpenChat(IAsyncResult res)
         {
             try
@@ -91,7 +96,7 @@ namespace AdamBot
                         run = false;
                         break;
                     }
-                    else if(ln == "start bot")
+                    else if (ln == "start bot")
                     {
                         isStarted = true;
                         stopWatch.Start();
@@ -123,18 +128,18 @@ namespace AdamBot
             {
                 System.Timers.Timer tmr = new System.Timers.Timer();
                 tmr.Interval = 20000;
-                tmr.Elapsed +=delegate {
+                tmr.Elapsed += delegate {
                     if (welcomeUser.Count != 0)
                         for (int i = 0; i < welcomeUser.Count; i++)
                             if (Convert.ToInt32(welcomeUser[i].Remove(0, welcomeUser[i].Length - 3)) <= stopWatch.Elapsed.Minutes - timeToSayHelloAgainInMinutes)
                                 welcomeUser.Remove(welcomeUser[i]);
-                    
+
                     if (!welcomeUser.Exists(t => t.Substring(0, t.Length - 3) == user.ID.ToLower()))
                     {
                         room.SendMessage("Willkommen @" + user.ID + ".Ich bin Adam der Bot dieses Streams. Sprich mich an, wenn du Infos zum Stream brauchst");
                         welcomeUser.Add(user.ID.ToLower() + stopWatch.Elapsed.Minutes.ToString("000"));
                     }
-                    
+
                     if (userCount % 10 == 0)
                     {
                         room.SendMessage("@" + user.ID + " ist der " + userCount + " besucher dieses Streams :hi:");
@@ -151,7 +156,7 @@ namespace AdamBot
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(e.Nick + ": " + e.Message);
             Console.ForegroundColor = ConsoleColor.White;
-            
+
             if (!isStarted)
                 return;
             if (e.User == null)
